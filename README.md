@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- 콘텐츠 통합관리 장애용
 
 ## Available Scripts
 
