@@ -1,12 +1,12 @@
 import { IItemProps } from 'lib/type';
 import {Link} from "react-router-dom";
 
-const Item = ({title, date, id}:IItemProps) => {
+const Item = ({type, title, create_date, id}:IItemProps) => {
     return (
-        <li key={id}>
-            <Link to={'notice/:postID'}>
-                <h4>{title}</h4>
-                <p>{date}</p>
+        <li className={type} key={id}>
+            <Link to={`notice/:${id}`}>
+                <h4 className="board-list__title">{title}</h4>
+                <p className="board-list__date">{create_date}</p>
             </Link>
         </li>
     )

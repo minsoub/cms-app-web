@@ -1,0 +1,54 @@
+.wrap {
+  z-index: 0;
+  .header {
+    border-bottom: 1px solid rgba(28, 32, 40, 0.05);
+    .page-title {
+      margin: 16px 0 8px;
+      padding: 0 24px;
+      .page-title__text {
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 34px;
+      }
+    }
+  }
+  
+  .sub-contents {
+    .board-list {
+      margin-top: 16px;
+      padding: 0 24px;
+      li {
+        padding: 16px 0;
+        a {
+          h4 {
+            font-size: 16px;
+            line-height: 24px;
+          }
+          .board-list__date {
+            margin-top: 4px;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #acb0b4;
+          }
+        }
+        
+        &.fixed {
+          a { 
+            h4 {
+              font-weight: 700;
+            }
+          }
+          
+        }
+        &.normal {
+          a {
+            h4 {
+              font-weight: 400;
+            }
+          }
+        }
+      }
+    }
+  }
+}

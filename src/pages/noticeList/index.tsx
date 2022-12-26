@@ -4,6 +4,7 @@ import Item from "components/List/Item";
 import Pagination from "components/List/Pagination";
 import fetcher from 'lib/api';
 import { METHOD, IItemProps } from 'lib/type';
+import './NoticeList.scss';
 
 const NoticeList = () => {
     const [notice, setNotice] = useState<IItemProps[]>()
@@ -35,27 +36,34 @@ const NoticeList = () => {
     }, [])
 
     return (
-        <main>
-            <h1>빗썸 공지사항</h1>
+        <main className="wrap">
+            <div className="header">
+                <h1 className="page-title">
+                    <span className="page-title__text">빗썸 공지사항</span>
+                </h1>
+            
+                {/* 카테고리 */}
+                <Category categoryName={categoryList}/>
+            </div>
 
-            {/* 카테고리 */}
-            <Category categoryName={categoryList}/>
 
-            {/* 게시글 리스트 */}
-            <ul>
-                {/* 고정글 */}
-                {fixNotice?.map((item) => {
-                    return (
-                        <Item title={item.title} date={item.date} id={item.id}/>
-                    )
-                })}
-                {/* 일반글 */}
-                {notice?.map((item) => {
-                    return (
-                        <Item title={item.title} date={item.date} id={item.id}/>
-                    )
-                })}
-            </ul>
+            <section className="sub-contents">
+                {/* 게시글 리스트 */}
+                <ul className="board-list">
+                    {/* 고정글 */}
+                    {fixNotice?.map((item) => {
+                        return (
+                            <Item type="fixed" title={item.title} create_date={item.create_date} id={item.id}/>
+                        )
+                    })}
+                    {/* 일반글 */}
+                    {notice?.map((item) => {
+                        return (
+                            <Item type="normal" title={item.title} create_date={item.create_date} id={item.id}/>
+                        )
+                    })}
+                </ul>
+            </section>
 
             {/* 페이징네이션 */}
             <Pagination />
