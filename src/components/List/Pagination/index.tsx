@@ -1,7 +1,7 @@
 const Pagination = () => {
     return (
         <>
-            boardItem
+            Pagination
         </>
     )
 }
