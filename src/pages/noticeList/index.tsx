@@ -6,13 +6,17 @@ import fetcher from 'lib/api';
 import { METHOD, IItemProps } from 'lib/type';
 import './NoticeList.scss';
 
+// 공지사항 리스트
 const NoticeList = () => {
+    // 공지사항 일반글
     const [notice, setNotice] = useState<IItemProps[]>()
+    // 공지사항 고정글
     const [fixNotice, setFixNotice] = useState<IItemProps[]>()
+    // 공지사항 카테고리
     const [categoryList, setCategoryList] = useState<string[]>([])
 
     /**
-     * 게시글 리스트 API
+     * 게시글 리스트 API 불러오기
      */
     const getList = async () => {
         const res = await fetcher(METHOD.GET, `/v1/api/cms/notice/list`);
@@ -22,12 +26,16 @@ const NoticeList = () => {
     }
 
     /**
-     * 카테고리 API
+     * 카테고리 API 불러오기
      */
     const getCategory = async () => {
         const res = await fetcher(METHOD.GET, `/v1/api/cms/notice/category`);
         const data = res.data.category_list;
         setCategoryList(data)
+    }
+
+    const handleClick = (pageNumber: number) => {
+
     }
 
     useEffect(() => {
@@ -66,7 +74,9 @@ const NoticeList = () => {
             </section>
 
             {/* 페이징네이션 */}
-            <Pagination />
+            {/*<Pagination*/}
+            {/*    handleClick={handleClick}*/}
+            {/*/>*/}
         </main>
     )
 }

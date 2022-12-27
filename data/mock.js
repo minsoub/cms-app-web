@@ -20,5 +20,5 @@ server.listen(5555, () => {
 });
 
 server.get('/v1/api/cms/notice/category', (req, res, next) => getData(req, res, next));
-server.get('/v1/api/cms/notice/detail', (req, res, next) => getData(req, res, next));
+server.get('/v1/api/cms/notice/detail/:boardPath', (req, res, next) => getData(req, res, next));
 server.get('/v1/api/cms/notice/list', (req, res, next) => getData(req, res, next));

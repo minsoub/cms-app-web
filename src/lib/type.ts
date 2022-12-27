@@ -13,3 +13,7 @@ export interface IItemProps {
 export interface ICategoryProps {
     categoryName: string[]
 }
+
+export interface IPath {
+    boardID: any
+}
