@@ -28,3 +28,23 @@
     color: #fff;
   }
 }
+
+@media (min-width: 600px) and (max-width: 1280px) {
+  .board-category {
+    -ms-overflow-style: none;
+  }
+  .board-category::-webkit-scrollbar{
+   display:none;
+  }
+  
+}
+
+@media (min-width: 1281px) {
+  .board-category {
+    -ms-overflow-style: none;
+  }
+  .board-category::-webkit-scrollbar{
+    display:none;
+  }
+  
+}

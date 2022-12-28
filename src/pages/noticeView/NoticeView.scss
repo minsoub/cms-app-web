@@ -1,0 +1,69 @@
+.board-view-wrap {
+  margin:0 auto;
+  .sub-contents {
+    &:before {
+      content: "";
+      position: fixed;
+      bottom: 0;
+      height: 24px;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 100%);
+    }
+    margin-top: 56px;
+    padding-top: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+    .board-view-title {
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(28, 32, 40, 0.1);
+      .board-view-title__text {
+        margin-bottom: 8px;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 34px;
+        color: #1c2028;
+      }
+      .board-view-title__extra-info {
+        margin-bottom: 8px;
+        font-size: 14px;
+        line-height: 20px;
+        color:#acb0b4;
+        .extra-info__edit:before {
+          content: "・";
+          width: 4px;
+          margin: 0 4px;
+        }
+      }
+      
+    }
+    .content {
+      padding-top: 40px;
+      line-height: 1.6;
+    }
+  }
+}
+
+
+@media (min-width: 600px) and (max-width: 1280px) {
+  .board-view-wrap {
+    max-width: 440px;
+    
+    .header {
+      max-width: 440px;
+      
+    }
+   
+  }
+}
+
+@media (min-width: 1281px) {
+  .board-view-wrap {
+    max-width: 600px;
+    .header {
+      max-width: 600px;
+      
+    }
+    
+  }
+}

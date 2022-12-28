@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import fetcher from "lib/api";
 import { METHOD, IPath } from "lib/type";
 import { useParams } from "react-router-dom";
-
+import './NoticeView.scss';
 
 // 공지사항 Detail 페이지
 const NoticeView = () => {
@@ -27,17 +27,19 @@ const NoticeView = () => {
     }, [])
 
     return (
-        <main>
+        <main className="board-view-wrap">
             <Header />
-
-            <div>
-                <h2>{title}</h2>
-                <p>{date}</p>
-                {modify === true && <p>수정됨</p>}
-
-            </div>
-
-            <article dangerouslySetInnerHTML={{ __html: htmlCode}}/>
+            <section className="sub-contents">
+                <div className="board-view-title">
+                    <h2 className="board-view-title__text">{title}</h2>
+                    <p className="board-view-title__extra-info">
+                        <span className="extra-info__date">{date}</span>
+                        {modify === true && <span className="extra-info__edit">수정됨</span>}
+                    </p>
+                    
+                </div>
+                <article className="content" dangerouslySetInnerHTML={{ __html: htmlCode}}/>
+            </section>
         </main>
     )
 }
