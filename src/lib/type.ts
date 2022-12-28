@@ -6,7 +6,7 @@ export enum METHOD {
 export interface IItemProps {
     type?: string,
     title:string,
-    create_date:string,
+    date:string,
     id: string
 }
 
