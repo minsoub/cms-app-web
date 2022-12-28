@@ -11,9 +11,19 @@ export interface IItemProps {
 }
 
 export interface ICategoryProps {
-    categoryName: string[]
+    value?: string,
+    handleSelect: (value:string) => void;
 }
 
 export interface IPath {
     boardID: any
+}
+
+export interface IBoardState {
+    totalCount: number,
+    currentPage: number,
+    limit: number,
+    data: null,
+    title: string,
+    categoryItem: string,
 }

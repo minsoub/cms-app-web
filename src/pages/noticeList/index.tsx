@@ -4,7 +4,6 @@ import Item from "components/List/Item";
 import Pagination from "components/List/Pagination";
 import fetcher from 'lib/api';
 import { METHOD, IItemProps } from 'lib/type';
-import './NoticeList.scss';
 
 // 공지사항 리스트
 const NoticeList = () => {
@@ -12,8 +11,6 @@ const NoticeList = () => {
     const [notice, setNotice] = useState<IItemProps[]>()
     // 공지사항 고정글
     const [fixNotice, setFixNotice] = useState<IItemProps[]>()
-    // 공지사항 카테고리
-    const [categoryList, setCategoryList] = useState<string[]>([])
 
     /**
      * 게시글 리스트 API 불러오기
@@ -25,13 +22,9 @@ const NoticeList = () => {
         console.log('res--->', res.data)
     }
 
-    /**
-     * 카테고리 API 불러오기
-     */
-    const getCategory = async () => {
-        const res = await fetcher(METHOD.GET, `/v1/api/cms/notice/category`);
-        const data = res.data.category_list;
-        setCategoryList(data)
+
+    const handleCategorySelect = (value: string) => {
+
     }
 
     const handleClick = (pageNumber: number) => {
@@ -40,38 +33,30 @@ const NoticeList = () => {
 
     useEffect(() => {
         getList()
-        getCategory()
     }, [])
 
     return (
-        <main className="wrap">
-            <div className="header">
-                <h1 className="page-title">
-                    <span className="page-title__text">빗썸 공지사항</span>
-                </h1>
-            
-                {/* 카테고리 */}
-                <Category categoryName={categoryList}/>
-            </div>
+        <main>
+            <h1>빗썸 공지사항</h1>
 
+            {/* 카테고리 */}
+            <Category handleSelect={handleCategorySelect}/>
 
-            <section className="sub-contents">
-                {/* 게시글 리스트 */}
-                <ul className="board-list">
-                    {/* 고정글 */}
-                    {fixNotice?.map((item) => {
-                        return (
-                            <Item type="fixed" title={item.title} create_date={item.create_date} id={item.id}/>
-                        )
-                    })}
-                    {/* 일반글 */}
-                    {notice?.map((item) => {
-                        return (
-                            <Item type="normal" title={item.title} create_date={item.create_date} id={item.id}/>
-                        )
-                    })}
-                </ul>
-            </section>
+            {/* 게시글 리스트 */}
+            <ul>
+                {/* 고정글 */}
+                {fixNotice?.map((item) => {
+                    return (
+                        <Item title={item.title} date={item.date} id={item.id}/>
+                    )
+                })}
+                {/* 일반글 */}
+                {notice?.map((item) => {
+                    return (
+                        <Item title={item.title} date={item.date} id={item.id}/>
+                    )
+                })}
+            </ul>
 
             {/* 페이징네이션 */}
             {/*<Pagination*/}
