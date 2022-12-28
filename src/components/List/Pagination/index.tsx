@@ -1,88 +1,46 @@
-import cx from 'classnames'
+import React, { useEffect } from 'react';
+import cx from 'classnames';
+import LeftArrow from './Arrows/LeftArrow';
+import RightArrow from './Arrows/RightArrow';
+import PagenationNumber from './PagenationNumber';
+import './Pagenation.css';
 
-interface PageProps {
-    // 총 게시물
-    totalPosts: number,
-    // 해당 페이지 클릭
-    handleClick: (number: number) => void,
-    // 현재 클릭한 페이지
-    activePage: number,
-    // 한 페이지당 제한 수 (=limit 10개)
-    postsPerPage: number,
-    totalPage: number
-}
+type Prop = {
+    onPageChange: (v: number) => void;
+    currentPage: number;
+    pagenationRange: number[];
+};
 
-// 페이징네이션
-const Pagination = ({ totalPosts,handleClick,activePage }:PageProps) => {
-    const pageNumbers: number[] = [];
-    let pageCount = 3;
-    if(activePage < 5 || activePage > totalPosts - 5) {
-        pageCount = 5;
-    }
-    let currentPageGroup = Math.ceil(activePage/pageCount);
-    let totalPageGroup = Math.ceil(totalPosts/pageCount);
-    let lastPageInGroup = currentPageGroup * pageCount;
-    if(lastPageInGroup > totalPosts) {
-        lastPageInGroup = totalPosts;
-    }
+const Pagenation = ({ onPageChange, currentPage, pagenationRange }: Prop) => {
+    const onNext = () => {
+        onPageChange(currentPage + 1);
+    };
 
-    let firstPageInGroup = lastPageInGroup - (pageCount - 1);
-    const next = lastPageInGroup + 1;
-    const prev = firstPageInGroup - 1;
+    const onPrev = () => {
+        onPageChange(currentPage - 1);
+    };
 
-    for(let i: number = firstPageInGroup; i<=lastPageInGroup; i++) {
-        pageNumbers.push(i);
-    }
+    const firstPage = pagenationRange[0]; // 첫 페이지 시 LeftArrow disabled 효과 추가해야함
 
-    const handleFirst = () => {
-        handleClick(1);
-    }
-    const handleLast = () => {
-        handleClick(totalPosts);
-    }
-    const nextPage = () => {
-        handleClick(next);
-    }
-    const prePage = () => {
-        handleClick(prev);
-    }
+    const lastPage = pagenationRange[-1]; // 마지막페이지 시 RightArrow disabled 효과 추가해야함
+
+    if (currentPage === 0 || pagenationRange.length < 2) return null;
 
     return (
-        <ul>
-            {/* 첫 페이지 */}
-            <li>
-                <button type="button" onClick={handleFirst}>&#171;</button>
-            </li>
-
-            {/* 이전 페이지 */}
-            {currentPageGroup > 1 && (
-                <li>
-                    <button type="button" onClick={prePage}>&#60;</button>
+        <ul className={cx('pagenation-wrap')}>
+            <div className={cx(`arrow-wrap`)} onClick={onPrev}>
+                <LeftArrow />
+            </div>
+            {pagenationRange.map((v, i) => (
+                <li key={i} className={cx('pagenation-number-wrap')}>
+                    <PagenationNumber onClick={() => onPageChange(v)} num={v} isCurrent={v === currentPage} />
                 </li>
-            )}
-
-            {/* 현재 페이지 */}
-            {pageNumbers.map((number:number, index:number) => {
-                return (
-                    <li key={index} className={cx({'pagination-item__current-page' : activePage === number})}>
-                        <button type="button" onClick={()=> handleClick(number)}>{number}</button>
-                    </li>
-                )
-            })}
-
-            {/* 다음 페이지 */}
-            {currentPageGroup < totalPageGroup && (
-                <li>
-                    <button type="button" onClick={nextPage}>&#62;</button>
-                </li>
-            )}
-
-            {/* 마지막 페이지 */}
-            <li>
-                <button type="button" onClick={handleLast}>&#187;</button>
-            </li>
+            ))}
+            <div className={cx(`arrow-wrap`)} onClick={onNext}>
+                <RightArrow />
+            </div>
         </ul>
-    )
-}
+    );
+};
 
-export default Pagination;
+export default Pagenation;
