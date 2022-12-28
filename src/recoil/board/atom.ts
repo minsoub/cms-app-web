@@ -10,11 +10,5 @@ export const boardDataState = atom<IBoardState>({
         currentPage:1,
         // 한 페이지당 게시글 제한 수
         limit:10,
-        // board 데이터 리스트
-        data:null,
-        // board 제목
-        title:'',
-        // board 카테고리
-        categoryItem:'',
     }
 });
