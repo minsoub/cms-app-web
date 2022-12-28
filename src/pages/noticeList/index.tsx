@@ -11,8 +11,6 @@ const NoticeList = () => {
     const [notice, setNotice] = useState<IItemProps[]>()
     // 공지사항 고정글
     const [fixNotice, setFixNotice] = useState<IItemProps[]>()
-    // 공지사항 카테고리
-    const [categoryList, setCategoryList] = useState<string[]>([])
 
     /**
      * 게시글 리스트 API 불러오기
@@ -24,13 +22,9 @@ const NoticeList = () => {
         console.log('res--->', res.data)
     }
 
-    /**
-     * 카테고리 API 불러오기
-     */
-    const getCategory = async () => {
-        const res = await fetcher(METHOD.GET, `/v1/api/cms/notice/category`);
-        const data = res.data.category_list;
-        setCategoryList(data)
+
+    const handleCategorySelect = (value: string) => {
+
     }
 
     const handleClick = (pageNumber: number) => {
@@ -39,7 +33,6 @@ const NoticeList = () => {
 
     useEffect(() => {
         getList()
-        getCategory()
     }, [])
 
     return (
@@ -47,7 +40,7 @@ const NoticeList = () => {
             <h1>빗썸 공지사항</h1>
 
             {/* 카테고리 */}
-            <Category categoryName={categoryList}/>
+            <Category handleSelect={handleCategorySelect}/>
 
             {/* 게시글 리스트 */}
             <ul>
