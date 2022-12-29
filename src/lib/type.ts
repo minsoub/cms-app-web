@@ -4,26 +4,22 @@ export enum METHOD {
 }
 
 export interface IItemProps {
-    type?: string,
-    title:string,
-    create_date:string,
-    id: string
+    title: string;
+    date: string;
+    id: string;
 }
 
 export interface ICategoryProps {
-    value?: string,
-    handleSelect: (value:string) => void;
+    value?: string;
+    handleSelect: (value: string) => void;
 }
 
 export interface IPath {
-    boardID: any
+    boardID: any;
 }
 
 export interface IBoardState {
-    totalCount: number,
-    currentPage: number,
-    limit: number,
-    data: null,
-    title: string,
-    categoryItem: string,
+    totalCount: number;
+    currentPage: number;
+    limit: number;
 }
