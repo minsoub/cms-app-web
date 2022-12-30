@@ -4,8 +4,9 @@ export enum METHOD {
 }
 
 export interface IItemProps {
+    type: string;
     title: string;
-    date: string;
+    create_date: string;
     id: string;
 }
 

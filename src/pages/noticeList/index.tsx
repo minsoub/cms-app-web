@@ -5,9 +5,9 @@ import Item from 'components/List/Item';
 import Pagination from 'components/List/Pagination';
 import fetcher from 'lib/api';
 import { METHOD, IItemProps } from 'lib/type';
-import './NoticeList.scss';
 import { boardDataState } from 'recoil/board/atom';
-import usePagenation from 'hooks/usePagenation'
+import usePagenation from 'hooks/usePagenation';
+import './NoticeList.scss';
 
 // 공지사항 리스트
 const NoticeList = () => {
@@ -81,7 +81,7 @@ const NoticeList = () => {
             </section>
 
             {/* 페이징네이션 */}
-            <Pagination onPageChange={handlePageChange} currentPage={boardInfo.currentPage} pagenationRange={pagenationRange} />
+            <Pagination onPageChange={handlePageChange} postsPerPage={boardInfo.limit} totalPosts={boardInfo.totalCount} currentPage={boardInfo.currentPage} totalPage={boardInfo.totalCount} /* pagenationRange={pagenationRange} */ />
         </main>
     );
 };
