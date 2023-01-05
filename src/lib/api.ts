@@ -10,7 +10,7 @@ const fetcher = async (method: METHOD, url: string) => {
         const res = await apis[method](url);
         return res.data;
     } catch (error: any) {
-        alert('데이터가 없습니다.');
+        console.log('error-->', error);
         return error;
     }
 };

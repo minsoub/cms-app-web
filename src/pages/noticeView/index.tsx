@@ -14,7 +14,8 @@ const NoticeView = () => {
 
     console.log('boardPath 입니다--->boardPath', boardPath);
     const getView = async () => {
-        const res = await fetcher(METHOD.GET, `/v1/api/cms/notice/detail/:${boardPath}`);
+        const res = await fetcher(METHOD.GET, `/api/v1/cms/notice/detail/:${boardPath}`);
+        console.log('getView--->', res);
         setTitle(res.data.title);
         setDate(res.data.create_date);
         setHtmlCode(res.data.content);

@@ -6,7 +6,7 @@ import Pagination from 'components/List/Pagination';
 import fetcher from 'lib/api';
 import { METHOD, IItemProps } from 'lib/type';
 import { boardDataState } from 'recoil/board/atom';
-import usePagenation from 'hooks/usePagenation'
+import usePagenation from 'hooks/usePagenation';
 // 공지사항 리스트
 const NoticeList = () => {
     // 공지사항 일반글
@@ -21,13 +21,17 @@ const NoticeList = () => {
         pageSize: boardInfo.limit,
     });
 
+    // 페이지 숫자
+    const pageNo = 0;
+    // 페이지 위치
+    const pageSize = 15;
 
     /**
      * 게시글 리스트 API 불러오기
      */
     const getList = async () => {
-        const res = await fetcher(METHOD.GET, `/v1/api/cms/notice/list`);
-        console.log('res--->', res);
+        const res = await fetcher(METHOD.GET, `/api/v1/cms/notice/list?pageNo=${pageNo}&pageSize=${pageSize}`);
+        console.log('게시글 리스트 res--->', res);
 
         if (res.status === 200) {
             setBoardInfo((prev) => ({ ...prev, totalCount: res.total }));
@@ -36,8 +40,16 @@ const NoticeList = () => {
         }
     };
 
+    /**
+     * 카테고리 선택
+     * @param value {string}
+     */
     const handleCategorySelect = (value: string) => {};
 
+    /**
+     * 페이지 변경
+     * @param pageNumber {number}
+     */
     const handlePageChange = (pageNumber: number) => {
         setBoardInfo((prev) => ({ ...prev, currentPage: pageNumber }));
     };
