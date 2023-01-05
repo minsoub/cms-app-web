@@ -8,10 +8,10 @@ import './Pagenation.css';
 type Prop = {
     onPageChange: (v: number) => void;
     currentPage: number;
-    pagenationRange: number[];
+    paginationRange: number[];
 };
 
-const Pagenation = ({ onPageChange, currentPage, pagenationRange }: Prop) => {
+const Pagination = ({ onPageChange, currentPage, paginationRange }: Prop) => {
     const onNext = () => {
         onPageChange(currentPage + 1);
     };
@@ -20,18 +20,18 @@ const Pagenation = ({ onPageChange, currentPage, pagenationRange }: Prop) => {
         onPageChange(currentPage - 1);
     };
 
-    const firstPage = pagenationRange[0]; // 첫 페이지 시 LeftArrow disabled 효과 추가해야함
+    const firstPage = paginationRange[0]; // 첫 페이지 시 LeftArrow disabled 효과 추가해야함
 
-    const lastPage = pagenationRange[-1]; // 마지막페이지 시 RightArrow disabled 효과 추가해야함
+    const lastPage = paginationRange[-1]; // 마지막페이지 시 RightArrow disabled 효과 추가해야함
 
-    if (currentPage === 0 || pagenationRange.length < 2) return null;
+    if (currentPage === 0 || paginationRange.length < 2) return null;
 
     return (
         <ul className={cx('pagenation-wrap')}>
             <div className={cx(`arrow-wrap`)} onClick={onPrev}>
                 <LeftArrow />
             </div>
-            {pagenationRange.map((v, i) => (
+            {paginationRange.map((v, i) => (
                 <li key={i} className={cx('pagenation-number-wrap')}>
                     <PagenationNumber onClick={() => onPageChange(v)} num={v} isCurrent={v === currentPage} />
                 </li>
@@ -43,4 +43,4 @@ const Pagenation = ({ onPageChange, currentPage, pagenationRange }: Prop) => {
     );
 };
 
-export default Pagenation;
+export default Pagination;

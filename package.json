@@ -49,8 +49,9 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://k8s-systemsd-cmsgatew-bf9933b554-461898068.ap-northeast-2.elb.amazonaws.com/",
   "devDependencies": {
     "prettier": "2.8.1"
-  }
+  },
+  "packageManager": "yarn@3.3.1",
+  "proxy": "http://cms-gateway-api.bithumbsystems.com"
 }

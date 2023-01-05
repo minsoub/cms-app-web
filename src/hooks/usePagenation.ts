@@ -6,13 +6,13 @@ type Prop = {
     pageSize: number;
 };
 
-const usePagenation = ({ totalCount, pageSize }: Prop) => {
-    const pagenationRange = useMemo(() => {
+const usePagination = ({ totalCount, pageSize }: Prop) => {
+    const paginationRange = useMemo(() => {
         const totalPageCount = Math.ceil(totalCount / pageSize);
         return range(1, totalPageCount);
     }, [pageSize, totalCount]);
 
-    return { pagenationRange };
+    return { paginationRange };
 };
 
-export default usePagenation;
+export default usePagination;

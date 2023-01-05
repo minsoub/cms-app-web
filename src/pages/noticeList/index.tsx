@@ -6,7 +6,7 @@ import Pagination from 'components/List/Pagination';
 import fetcher from 'lib/api';
 import { METHOD, IItemProps } from 'lib/type';
 import { boardDataState } from 'recoil/board/atom';
-import usePagenation from 'hooks/usePagenation';
+import usePagination from 'hooks/usePagenation';
 // 공지사항 리스트
 const NoticeList = () => {
     // 공지사항 일반글
@@ -16,7 +16,7 @@ const NoticeList = () => {
 
     const [boardInfo, setBoardInfo] = useRecoilState(boardDataState);
 
-    const { pagenationRange } = usePagenation({
+    const { paginationRange } = usePagination({
         totalCount: boardInfo.totalCount,
         pageSize: boardInfo.limit,
     });
@@ -82,7 +82,7 @@ const NoticeList = () => {
             </ul>
 
             {/* 페이징네이션 */}
-            <Pagination onPageChange={handlePageChange} currentPage={boardInfo.currentPage} pagenationRange={pagenationRange} />
+            <Pagination onPageChange={handlePageChange} currentPage={boardInfo.currentPage} paginationRange={paginationRange} />
         </main>
     );
 };
