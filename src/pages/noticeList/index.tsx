@@ -4,15 +4,15 @@ import Category from 'components/List/Category';
 import Item from 'components/List/Item';
 import Pagination from 'components/List/Pagination';
 import fetcher from 'lib/api';
-import { METHOD, IItemProps } from 'lib/type';
+import { METHOD, IItemProps, TNoticeView } from 'lib/type';
 import { boardDataState } from 'recoil/board/atom';
 import usePagination from 'hooks/usePagenation';
 // 공지사항 리스트
 const NoticeList = () => {
     // 공지사항 일반글
-    const [notice, setNotice] = useState<IItemProps[]>();
+    const [notice, setNotice] = useState<TNoticeView[]>([]);
     // 공지사항 고정글
-    const [fixNotice, setFixNotice] = useState<IItemProps[]>();
+    const [fixNotice, setFixNotice] = useState<TNoticeView[]>([]);
 
     const [boardInfo, setBoardInfo] = useRecoilState(boardDataState);
 
@@ -33,9 +33,10 @@ const NoticeList = () => {
         const res = await fetcher(METHOD.GET, `/api/v1/cms/notice/list?pageNo=${pageNo}&pageSize=${pageSize}`);
         console.log('게시글 리스트 res--->', res);
 
-        if (res.status === 200) {
+        if (res.result === "SUCCESS") {
+            console.log('13121313131');
             setBoardInfo((prev) => ({ ...prev, totalCount: res.total }));
-            setNotice(res.data.list);
+            setNotice(res.data.list.content);
             setFixNotice(res.data.fix);
         }
     };
@@ -59,8 +60,8 @@ const NoticeList = () => {
     }, [boardInfo.currentPage, boardInfo.limit]);
 
     useEffect(() => {
-        console.log({ boardInfo });
-    }, [boardInfo]);
+        console.log({ fixNotice });
+    }, [fixNotice]);
 
     return (
         <main>
@@ -73,11 +74,11 @@ const NoticeList = () => {
             <ul>
                 {/* 고정글 */}
                 {fixNotice?.map((item) => {
-                    return <Item title={item.title} date={item.date} id={item.id} />;
+                    return <Item title={item.title} date={item.screen_date} id={item.id} />;
                 })}
                 {/* 일반글 */}
                 {notice?.map((item) => {
-                    return <Item title={item.title} date={item.date} id={item.id} />;
+                    return <Item title={item.title} date={item.screen_date} id={item.id} />;
                 })}
             </ul>
 
