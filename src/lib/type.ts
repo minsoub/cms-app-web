@@ -19,6 +19,13 @@ export interface IPath {
     boardID: any;
 }
 
+export type TPagination = {
+    totalPages: number;
+    totalElements: number;
+    size: number;
+    pageNumber: number;
+};
+
 // 게시물 pagination
 export interface IBoardState {
     pageable: {
@@ -52,7 +59,7 @@ export interface IBoardState {
 export type TNoticeList = {
     id: string; // 게시글 id
     title: string; // 제목
-    createDate: string[]; // 카테고리명
+    createDate: string; // 카테고리명
     categoryNames: string[];
 };
 
