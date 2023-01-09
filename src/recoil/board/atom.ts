@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { TPagination, TNoticeList } from 'lib/type';
+import { TPagination } from 'lib/type';
 
 export const boardDataState = atom<TPagination>({
     key: 'boardDataState',
