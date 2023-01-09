@@ -14,46 +14,68 @@ export interface ICategoryProps {
     handleSelect: (value: string) => void;
 }
 
+// 게시글 파라미터
 export interface IPath {
     boardID: any;
 }
 
+// 게시물 pagination
 export interface IBoardState {
-    totalCount: number;
-    currentPage: number;
-    limit: number;
+    pageable: {
+        sort: {
+            empty: boolean;
+            sorted: boolean;
+            unsorted: boolean;
+        };
+        offset: number;
+        pageNumber: number;
+        pageSize: number;
+        paged: boolean;
+        unpaged: boolean;
+    };
+    last: boolean;
+    totalPages: number;
+    totalElements: number;
+    sort: {
+        empty: boolean;
+        sorted: boolean;
+        unsorted: boolean;
+    };
+    first: boolean;
+    size: number;
+    number: number;
+    numberOfElements: number;
+    empty: boolean;
 }
 
 // 공지사항 리스트
 export type TNoticeList = {
-    id: string;
+    id: string; // 게시글 id
     title: string; // 제목
-    category_name: string[]; // 카테고리명
-    category_ids: string[];
-    screen_date: string; // 작성일
-    thumbnail_url: string; // 썸네일 url
+    createDate: string[]; // 카테고리명
+    categoryNames: string[];
 };
 
-// 공지사항 view
-export type TNoticeView = {
+// 공지사항 Detail
+export type TNoticeDetail = {
     id: string;
     title: string; // 제목
-    category_name: string[]; // 카테고리명
-    category_ids: string[];
+    categoryNames: string[]; // 카테고리명
+    categoryIds: string[];
     content: string; // 내용물
-    read_count: number; // 조회수
-    screen_date: string; // 작성일
-    share_title: string;
-    share_description: string; // 공유 내용
-    share_file_id: string;
-    share_button_name: string; // sns 버튼
-    file_id: string;
-    file_name: string; // 파일명
-    file_size: number; // 파일 사이즈
+    readCount: number; // 조회수
+    createDate: string; // 작성일
+    shareTitle: string;
+    shareDescription: string; // 공유 내용
+    shareFileId: null;
+    shareButtonName: string; // sns 버튼
+    fileId: null;
+    fileName: null; // 파일명
+    fileSize: null; // 파일 사이즈
 };
 
 // 공지사항 카테고리
 export type TCategory = {
-    id: string;
+    id: string; // 카테고리 ID
     name: string; // 카테고리명
 };
