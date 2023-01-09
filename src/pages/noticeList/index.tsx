@@ -55,15 +55,6 @@ const NoticeList = () => {
         getList();
     }, [boardInfo.pageNumber, boardInfo.size]);
 
-    useEffect(() => {
-        console.log({ pagenationRange });
-    }, [pagenationRange]);
-
-    // boardInfo
-    useEffect(() => {
-        console.log({ boardInfo });
-    }, [boardInfo]);
-
     return (
         <main>
             <h1>빗썸 공지사항</h1>

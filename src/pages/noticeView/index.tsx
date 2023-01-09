@@ -34,7 +34,7 @@ const NoticeView = () => {
             <div>
                 <h2>{title}</h2>
                 <p>{date}</p>
-                {modify === true && <p>수정됨</p>}
+                {modify && <p>수정됨</p>}
             </div>
 
             {/* 콘텐츠 영역*/}

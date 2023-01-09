@@ -4,10 +4,10 @@ type Prop = {
     onClick: () => void;
 };
 
-const PagenationNumber = ({ num, isCurrent, onClick }: Prop) => (
+const PaginationNumber = ({ num, isCurrent, onClick }: Prop) => (
     <span className={isCurrent ? 'active' : ''} onClick={onClick}>
         {num}
     </span>
 );
 
-export default PagenationNumber;
+export default PaginationNumber;

@@ -17,7 +17,7 @@ const usePagination = ({ pageNumber, totalElements, pageSize }: Prop) => {
         return Math.ceil(totalElements / pageSize);
     }, [totalElements, pageSize]);
 
-    // pagenationRange 표시개수
+    // paginationRange 표시개수
     const pageCount = useMemo(() => {
         if (pageNumber < 5) {
             return 5;
