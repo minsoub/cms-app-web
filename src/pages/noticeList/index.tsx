@@ -6,7 +6,7 @@ import Pagination from 'components/List/Pagination';
 import fetcher from 'lib/api';
 import { METHOD, TNoticeList } from 'lib/type';
 import { boardDataState } from 'recoil/board/atom';
-import usePagination from 'hooks/usePagenation';
+import usePagination from 'hooks/usePagination';
 
 // 공지사항 리스트
 const NoticeList = () => {
