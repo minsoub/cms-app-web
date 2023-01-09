@@ -4,34 +4,34 @@ import Category from 'components/List/Category';
 import Item from 'components/List/Item';
 import Pagination from 'components/List/Pagination';
 import fetcher from 'lib/api';
-import { METHOD, IItemProps, TNoticeView } from 'lib/type';
+import { METHOD, TNoticeList } from 'lib/type';
 import { boardDataState } from 'recoil/board/atom';
 import usePagination from 'hooks/usePagenation';
+
 // 공지사항 리스트
 const NoticeList = () => {
     // 공지사항 일반글
-    const [notice, setNotice] = useState<TNoticeView[]>([]);
+    const [notice, setNotice] = useState<TNoticeList[]>([]);
     // 공지사항 고정글
-    const [fixNotice, setFixNotice] = useState<TNoticeView[]>([]);
-
+    const [fixNotice, setFixNotice] = useState<TNoticeList[]>([]);
+    // 게시판 info
     const [boardInfo, setBoardInfo] = useRecoilState(boardDataState);
 
     const { pagenationRange, prePageNationRange, lastPagenationRange, totalPageCount } = usePagination({
-        currentPage: boardInfo.currentPage,
-        totalCount: boardInfo.totalCount,
-        pageSize: boardInfo.limit,
+        pageNumber: boardInfo.pageNumber,
+        totalElements: boardInfo.totalElements,
+        pageSize: boardInfo.size,
     });
 
     /**
      * 게시글 리스트 API 불러오기
      */
     const getList = async () => {
-        const res = await fetcher(METHOD.GET, `/api/v1/cms/notice/list?pageNo=${boardInfo.currentPage}&pageSize=${boardInfo.limit}`);
+        const res = await fetcher(METHOD.GET, `/api/v1/cms/notice/list?pageNo=${boardInfo.pageNumber}&pageSize=${boardInfo.size}`);
         console.log('게시글 리스트 res--->', res);
 
         if (res.result === 'SUCCESS') {
-            console.log('13121313131');
-            setBoardInfo((prev) => ({ ...prev, totalCount: res.data.list.totalElements }));
+            setBoardInfo((prev) => ({ ...prev, totalElements: res.data.list.totalElements, totalPages: res.data.list.totalPages }));
             setNotice(res.data.list.content);
             setFixNotice(res.data.fix);
         }
@@ -48,12 +48,12 @@ const NoticeList = () => {
      * @param pageNumber {number}
      */
     const handlePageChange = (pageNumber: number) => {
-        setBoardInfo((prev) => ({ ...prev, currentPage: pageNumber }));
+        setBoardInfo((prev) => ({ ...prev, pageNumber: pageNumber }));
     };
 
     useEffect(() => {
         getList();
-    }, [boardInfo.currentPage, boardInfo.limit]);
+    }, [boardInfo.pageNumber, boardInfo.size]);
 
     useEffect(() => {
         console.log({ pagenationRange });
@@ -63,6 +63,7 @@ const NoticeList = () => {
     useEffect(() => {
         console.log({ boardInfo });
     }, [boardInfo]);
+
     return (
         <main>
             <h1>빗썸 공지사항</h1>
@@ -75,19 +76,19 @@ const NoticeList = () => {
             {/* 게시글 리스트 */}
             <ul>
                 {/* 고정글 */}
-                {fixNotice?.map((item) => {
-                    return <Item title={item.title} date={item.screen_date} id={item.id} />;
+                {fixNotice.map((item: TNoticeList) => {
+                    return <Item title={item.title} createDate={item.createDate} id={item.id} />;
                 })}
                 {/* 일반글 */}
-                {notice?.map((item) => {
-                    return <Item title={item.title} date={item.screen_date} id={item.id} />;
+                {notice.map((item: TNoticeList) => {
+                    return <Item title={item.title} createDate={item.createDate} id={item.id} />;
                 })}
             </ul>
 
             <hr />
 
             {/* 페이징네이션 */}
-            <Pagination onPageChange={handlePageChange} currentPage={boardInfo.currentPage} pagenationRange={pagenationRange} prePagenationRange={prePageNationRange} lastPagenationRange={lastPagenationRange} totalCount={totalPageCount} />
+            <Pagination onPageChange={handlePageChange} currentPage={boardInfo.pageNumber} pagenationRange={pagenationRange} prePagenationRange={prePageNationRange} lastPagenationRange={lastPagenationRange} totalCount={totalPageCount} />
         </main>
     );
 };
