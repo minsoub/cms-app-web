@@ -5,16 +5,14 @@ import RightArrow from './Arrows/RightArrow';
 import PagenationNumber from './PagenationNumber';
 import './Pagenation.css';
 
-type Prop = {
+type TPaginationProp = {
     onPageChange: (v: number) => void;
     currentPage: number;
     pagenationRange: number[];
-    prePagenationRange: number[];
-    lastPagenationRange: number[];
     totalCount: number;
 };
 
-const Pagination = ({ onPageChange, currentPage, pagenationRange }: Prop) => {
+const Pagination = ({ onPageChange, currentPage, pagenationRange }: TPaginationProp) => {
     const onNext = () => {
         onPageChange(currentPage + 1);
     };
@@ -22,6 +20,10 @@ const Pagination = ({ onPageChange, currentPage, pagenationRange }: Prop) => {
     const onPrev = () => {
         onPageChange(currentPage - 1);
     };
+
+    useEffect(() => {
+        console.log('onPageChange--->', onPageChange, '|', currentPage, '|', pagenationRange);
+    }, []);
 
     const firstPage = pagenationRange[0]; // 첫 페이지 시 LeftArrow disabled 효과 추가해야함
 

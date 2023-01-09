@@ -19,46 +19,30 @@ const usePagination = ({ pageNumber, totalElements, pageSize }: Prop) => {
 
     // pagenationRange 표시개수
     const pageCount = useMemo(() => {
-        if (pageSize < 5) {
+        if (pageNumber < 5) {
             return 5;
-        } else if (pageSize > totalPageCount - 2) {
-            return 3;
+        } else if (pageNumber > totalPageCount - 2) {
+            return 5;
         } else {
-            return 0;
+            return 3;
         }
-    }, [pageSize, totalPageCount]);
-
-    // 첫번째 페이징네이션 영역
-    const prePageNationRange = useMemo(() => {
-        if (pageCount !== 5) {
-            return [1];
-        }
-        return [];
-    }, [pageCount]);
+    }, [pageNumber, totalPageCount]);
 
     const pagenationRange = useMemo(() => {
-        const currentPageGroup = Math.ceil(pageSize / pageCount);
+        const currentPageGroup = Math.ceil(pageNumber / pageCount);
         let lastPageInGroup = currentPageGroup * pageCount;
-
+        console.log({ currentPageGroup });
+        console.log({ lastPageInGroup });
         if (lastPageInGroup > totalPageCount) {
             lastPageInGroup = totalPageCount;
         }
         const firstPageInGroup = lastPageInGroup - (pageCount - 1);
 
         return range(firstPageInGroup, lastPageInGroup);
-    }, [pageSize, totalPageCount, pageCount]);
-
-    const lastPagenationRange = useMemo(() => {
-        if (pageCount !== 5) {
-            return [totalPageCount];
-        }
-        return [];
-    }, [pageCount, totalPageCount]);
+    }, [pageNumber, totalPageCount, pageCount]);
 
     return {
         pagenationRange,
-        prePageNationRange,
-        lastPagenationRange,
         totalPageCount,
     };
 };

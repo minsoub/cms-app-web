@@ -17,7 +17,7 @@ const NoticeList = () => {
     // 게시판 info
     const [boardInfo, setBoardInfo] = useRecoilState(boardDataState);
 
-    const { pagenationRange, prePageNationRange, lastPagenationRange, totalPageCount } = usePagination({
+    const { pagenationRange, totalPageCount } = usePagination({
         pageNumber: boardInfo.pageNumber,
         totalElements: boardInfo.totalElements,
         pageSize: boardInfo.size,
@@ -88,7 +88,7 @@ const NoticeList = () => {
             <hr />
 
             {/* 페이징네이션 */}
-            <Pagination onPageChange={handlePageChange} currentPage={boardInfo.pageNumber} pagenationRange={pagenationRange} prePagenationRange={prePageNationRange} lastPagenationRange={lastPagenationRange} totalCount={totalPageCount} />
+            <Pagination onPageChange={handlePageChange} currentPage={boardInfo.pageNumber} pagenationRange={pagenationRange}  totalCount={totalPageCount} />
         </main>
     );
 };
