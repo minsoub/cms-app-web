@@ -1,14 +1,12 @@
 import { atom } from 'recoil';
-import {IBoardState} from "lib/type";
+import { TPagination, TNoticeList } from 'lib/type';
 
-export const boardDataState = atom<IBoardState>({
-    key: 'board',
+export const boardDataState = atom<TPagination>({
+    key: 'boardDataState',
     default: {
-        // 총 게시글
-        totalCount:0,
-        // 현재 페이지
-        currentPage:1,
-        // 한 페이지당 게시글 제한 수
-        limit:10,
-    }
+        totalElements: 0, // 총 게시글
+        pageNumber: 1, // 현재 페이지
+        totalPages: 0, // 총 페이지
+        size: 10, // 한 페이지당 게시글 제한 수 limit
+    },
 });
