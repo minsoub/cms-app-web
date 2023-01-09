@@ -6,7 +6,7 @@ import Pagination from 'components/List/Pagination';
 import fetcher from 'lib/api';
 import { METHOD, IItemProps, TNoticeView } from 'lib/type';
 import { boardDataState } from 'recoil/board/atom';
-import usePagination from 'hooks/usePagenation';
+import usePagination from 'hooks/usePagination';
 // 공지사항 리스트
 const NoticeList = () => {
     // 공지사항 일반글
@@ -16,7 +16,7 @@ const NoticeList = () => {
 
     const [boardInfo, setBoardInfo] = useRecoilState(boardDataState);
 
-    const { pagenationRange, prePageNationRange, lastPagenationRange, totalPageCount } = usePagination({
+    const { paginationRange, prePaginationRange, lastPaginationRange, totalPageCount } = usePagination({
         currentPage: boardInfo.currentPage,
         totalCount: boardInfo.totalCount,
         pageSize: boardInfo.limit,
@@ -56,8 +56,8 @@ const NoticeList = () => {
     }, [boardInfo.currentPage, boardInfo.limit]);
 
     useEffect(() => {
-        console.log({ pagenationRange });
-    }, [pagenationRange]);
+        console.log({ paginationRange });
+    }, [paginationRange]);
 
     // boardInfo
     useEffect(() => {
@@ -87,7 +87,7 @@ const NoticeList = () => {
             <hr />
 
             {/* 페이징네이션 */}
-            <Pagination onPageChange={handlePageChange} currentPage={boardInfo.currentPage} pagenationRange={pagenationRange} prePagenationRange={prePageNationRange} lastPagenationRange={lastPagenationRange} totalCount={totalPageCount} />
+            <Pagination onPageChange={handlePageChange} currentPage={boardInfo.currentPage} paginationRange={paginationRange} prePaginationRange={prePaginationRange} lastPaginationRange={lastPaginationRange} totalCount={totalPageCount} />
         </main>
     );
 };

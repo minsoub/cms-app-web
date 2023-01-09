@@ -1,3 +1,5 @@
+
+
 // API 통신 메서드
 export enum METHOD {
     GET = 'get',

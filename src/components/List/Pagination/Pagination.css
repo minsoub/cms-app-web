@@ -1,15 +1,15 @@
-.pagenation-wrap {
+.pagination-wrap {
     list-style: none;
     display: flex;
     align-items: center;
     padding: 0;
 }
 
-.pagenation-number-wrap {
+.pagination-number-wrap {
     margin: 0 4px;
 }
 
-.pagenation-number {
+.pagination-number {
     display: block;
     width: 24px;
     height: 24px;

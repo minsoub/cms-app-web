@@ -17,7 +17,7 @@ const usePagination = ({ currentPage, totalCount, pageSize }: Prop) => {
         return Math.ceil(totalCount / pageSize);
     }, [totalCount, pageSize]);
 
-    // pagenationRange 표시개수
+    // paginationRange 표시개수
     const pageCount = useMemo(() => {
         if (currentPage < 5) {
             return 5;
@@ -29,14 +29,14 @@ const usePagination = ({ currentPage, totalCount, pageSize }: Prop) => {
     }, [currentPage, totalPageCount]);
 
     // 첫번째 페이징네이션 영역
-    const prePageNationRange = useMemo(() => {
+    const prePaginationRange = useMemo(() => {
         if (pageCount !== 5) {
             return [1];
         }
         return [];
     }, [pageCount]);
 
-    const pagenationRange = useMemo(() => {
+    const paginationRange = useMemo(() => {
         const currentPageGroup = Math.ceil(currentPage / pageCount);
         let lastPageInGroup = currentPageGroup * pageCount;
 
@@ -48,7 +48,7 @@ const usePagination = ({ currentPage, totalCount, pageSize }: Prop) => {
         return range(firstPageInGroup, lastPageInGroup);
     }, [currentPage, totalPageCount, pageCount]);
 
-    const lastPagenationRange = useMemo(() => {
+    const lastPaginationRange = useMemo(() => {
         if (pageCount !== 5) {
             return [totalPageCount];
         }
@@ -56,9 +56,9 @@ const usePagination = ({ currentPage, totalCount, pageSize }: Prop) => {
     }, [pageCount, totalPageCount]);
 
     return {
-        pagenationRange,
-        prePageNationRange,
-        lastPagenationRange,
+        paginationRange,
+        prePaginationRange,
+        lastPaginationRange,
         totalPageCount,
     };
 };
