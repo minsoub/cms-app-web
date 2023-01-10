@@ -1,0 +1,105 @@
+.board-list-wrap {
+  margin: 0 auto;
+  .board-list-header {
+    overflow: hidden;
+    position: fixed;
+    max-width: 100%;
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(28, 32, 40, 0.05);
+    z-index: 100;
+    .board-list-header__title {
+      margin: 16px 0 8px;
+      padding: 0 24px;
+      .board-list-header__text {
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 34px;
+      }
+    }
+  }
+  .board-list-content {
+    padding-top: 124px;
+    position: relative;
+    &::after {
+      content: "";
+      position: fixed;
+      z-index: 10;
+      bottom: 0px;
+      padding-bottom: 0;
+      height: 24px;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 100%);
+  }
+    .board-list {
+      margin-top: 16px;
+      padding: 0 24px;
+
+      .board-list__item {
+        padding: 16px 0;
+        .board-list__link {
+          display: block;
+          .board-list__title {
+            font-size: 16px;
+            line-height: 24px;
+          }
+          .board-list__date {
+            margin-top: 4px;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #acb0b4;
+          }
+        }
+
+        &.board-list__item--fixed {
+          .board-list__title {
+            font-weight: 700;
+          }
+        }
+
+        &.board-list__item--normal {
+          .board-list__title {
+            font-weight: 400;
+          }
+        }
+
+
+      }
+    }
+
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1280px) {
+  .board-list-wrap {
+    max-width: 440px;
+    .board-list-header {
+      max-width: 440px;
+      .board-list-header__title {
+        margin-top: 48px;
+      }
+    }
+
+    .board-list-content {
+      padding-top: 156px;
+    }
+  }
+}
+
+@media (min-width: 1281px) {
+  .board-list-wrap {
+    max-width: 600px;
+    .board-list-header {
+      max-width: 600px;
+      .board-list-header__title {
+        margin-top: 48px;
+      }
+    }
+
+    .board-list-content {
+      padding-top: 156px;
+    }
+  }
+}

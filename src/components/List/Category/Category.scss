@@ -1,0 +1,50 @@
+.board-list-category {
+  padding: 16px 24px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.board-list-category__item {
+  &:not(:last-child) {
+    margin-right: 8px;
+  }
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 18px;
+  background-color: #f6f7f8;
+}
+
+.board-list-category__text {
+  font-size: 13px;
+  font-weight: 400;
+  color: #93989e;
+}
+
+.board-list-category__item--active {
+  background-color: #1c2028;
+  .board-list-category__text {
+    font-weight: 500;
+    color: #fff;
+  }
+}
+
+
+@media (min-width: 600px) and (max-width: 1280px) {
+  .board-list-category {
+    -ms-overflow-style: none;
+  }
+  .board-list-category::-webkit-scrollbar{
+   display:none;
+  }
+  
+}
+
+@media (min-width: 1281px) {
+  .board-list-category {
+    -ms-overflow-style: none;
+  }
+  .board-list-category::-webkit-scrollbar{
+    display:none;
+  }
+  
+}

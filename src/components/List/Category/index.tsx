@@ -1,7 +1,7 @@
 import { ICategoryProps, METHOD, TCategory } from 'lib/type';
 import fetcher from 'lib/api';
 import { useEffect, useState } from 'react';
-import cx from 'classnames';
+import './Category.scss';
 
 /**
  * 카테고리 영역
@@ -38,12 +38,12 @@ const Category = ({ value, handleSelect }: ICategoryProps) => {
     }, []);
 
     return (
-        <ul>
-            {categoryList.map((item: TCategory) => {
+        <ul className="board-list-category">
+            {categoryList.map((item: TCategory, index: number) => {
                 return (
-                    <li className={cx({ active: item.id === value })} onClick={() => handleButtonActive(item)} key={item.id}>
+                    <li className={`board-list-category__item ${index === indexActive?'board-list-category__item--active':''}`} onClick={() => handleButtonActive(index)} key={item.id}>
                         <button type="button" onClick={() => handleSelect(item.id)} value={item.name}>
-                            {item.name}
+                            <span className="board-list-category__text">{item.name}</span>
                         </button>
                     </li>
                 );
