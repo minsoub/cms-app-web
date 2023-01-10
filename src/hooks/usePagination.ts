@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { range } from '../utils/helpers';
 
 type Prop = {
     pageNumber: number;
@@ -28,7 +27,7 @@ const usePagination = ({ pageNumber, totalElements, pageSize }: Prop) => {
         }
     }, [pageNumber, totalPageCount]);
 
-    const pagenationRange = useMemo(() => {
+    const paginationRange = useMemo(() => {
         const currentPageGroup = Math.ceil(pageNumber / pageCount);
         let lastPageInGroup = currentPageGroup * pageCount;
         console.log({ currentPageGroup });
@@ -42,7 +41,7 @@ const usePagination = ({ pageNumber, totalElements, pageSize }: Prop) => {
     }, [pageNumber, totalPageCount, pageCount]);
 
     return {
-        pagenationRange,
+        paginationRange,
         totalPageCount,
     };
 };

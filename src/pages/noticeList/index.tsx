@@ -17,7 +17,7 @@ const NoticeList = () => {
     // 게시판 info
     const [boardInfo, setBoardInfo] = useRecoilState(boardDataState);
 
-    const { pagenationRange, totalPageCount } = usePagination({
+    const { paginationRange, totalPageCount } = usePagination({
         pageNumber: boardInfo.pageNumber,
         totalElements: boardInfo.totalElements,
         pageSize: boardInfo.size,
@@ -27,7 +27,7 @@ const NoticeList = () => {
      * 게시글 리스트 API 불러오기
      */
     const getList = async () => {
-        const res = await fetcher(METHOD.GET, `/api/v1/cms/notice/list?pageNo=${boardInfo.pageNumber}&pageSize=${boardInfo.size}`);
+        const res = await fetcher(METHOD.GET, `/api/v1/cms/notices?pageNo=${boardInfo.pageNumber}&pageSize=${boardInfo.size}`);
         console.log('게시글 리스트 res--->', res);
 
         if (res.result === 'SUCCESS') {
@@ -79,7 +79,7 @@ const NoticeList = () => {
             <hr />
 
             {/* 페이징네이션 */}
-            <Pagination onPageChange={handlePageChange} currentPage={boardInfo.pageNumber} paginationRange={pagenationRange} totalCount={totalPageCount} />
+            <Pagination onPageChange={handlePageChange} currentPage={boardInfo.pageNumber} paginationRange={paginationRange} totalCount={totalPageCount} />
         </main>
     );
 };

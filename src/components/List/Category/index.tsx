@@ -19,7 +19,7 @@ const Category = ({ value, handleSelect }: ICategoryProps) => {
      * 카테고리 API 불러오기
      */
     const getCategory = async () => {
-        const res = await fetcher(METHOD.GET, `/api/v1/cms/notice/category`);
+        const res = await fetcher(METHOD.GET, `/api/v1/cms/categories`);
         const data = res.data;
         console.log(data);
         setCategoryList(data);
