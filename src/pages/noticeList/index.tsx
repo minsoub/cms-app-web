@@ -27,7 +27,7 @@ const NoticeList = () => {
      * 게시글 리스트 API 불러오기
      */
     const getList = async () => {
-        const res = await fetcher(METHOD.GET, `/api/v1/cms/notice/list?pageNo=${boardInfo.pageNumber}&pageSize=${boardInfo.size}`);
+        const res = await fetcher(METHOD.GET, `/api/v1/cms/notices?pageNo=${boardInfo.pageNumber}&pageSize=${boardInfo.size}`);
         console.log('게시글 리스트 res--->', res);
 
         if (res.result === 'SUCCESS') {

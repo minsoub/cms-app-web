@@ -20,7 +20,7 @@ const NoticeView = () => {
      * view API 불러오기
      */
     const getView = async () => {
-        const res = await fetcher(METHOD.GET, `/api/v1/cms/notice/detail/${boardID}`);
+        const res = await fetcher(METHOD.GET, `/api/v1/cms/notices/${boardID}`);
         setTitle(res.data.title);
         setDate(res.data.createDate);
         setHtmlCode(res.data.content);
