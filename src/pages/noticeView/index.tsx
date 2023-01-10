@@ -13,8 +13,6 @@ const NoticeView = () => {
     const [date, setDate] = useState<string>('');
     // 콘텐츠
     const [htmlCode, setHtmlCode] = useState<string>('');
-    // 수정됨 여부
-    const [modify, setModify] = useState<boolean>(false);
 
     /**
      * view API 불러오기
@@ -24,7 +22,6 @@ const NoticeView = () => {
         setTitle(res.data.title);
         setDate(res.data.createDate);
         setHtmlCode(res.data.content);
-        setModify(res.data.isUpdate);
     };
 
     useEffect(() => {
@@ -40,7 +37,6 @@ const NoticeView = () => {
             <div>
                 <h2>{title}</h2>
                 <p>{date}</p>
-                {modify && <p>수정됨</p>}
             </div>
 
             {/* 콘텐츠 영역*/}
