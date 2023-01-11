@@ -4,7 +4,7 @@ import FirstArrow from './Arrows/FirstArrow';
 import LastArrow from './Arrows/LastArrow';
 import LeftArrow from './Arrows/LeftArrow';
 import RightArrow from './Arrows/RightArrow';
-import './Pagination.scss';
+import './Pagenation.scss';
 
 type TPaginationProp = {
     onPageChange: (v: number) => void;
