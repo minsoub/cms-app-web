@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import fetcher from 'lib/api';
 import { METHOD } from 'lib/type';
 import { useParams } from 'react-router-dom';
+import './NoticeView.scss'
 
 // 공지사항 Detail 페이지
 const NoticeView = () => {
