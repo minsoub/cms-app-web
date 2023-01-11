@@ -1,10 +1,9 @@
-import Header from "components/View/Header";
-import {useEffect, useState} from "react";
-import fetcher from "lib/api";
-import { METHOD, IPath } from "lib/type";
-import { useParams } from "react-router-dom";
+import Header from 'components/View/Header';
+import { useEffect, useState } from 'react';
+import fetcher from 'lib/api';
+import { METHOD } from 'lib/type';
+import { useParams } from 'react-router-dom';
 import './NoticeView.scss';
-
 
 // 공지사항 Detail 페이지
 const NoticeView = () => {
@@ -15,9 +14,6 @@ const NoticeView = () => {
     const [date, setDate] = useState<string>('');
     // 콘텐츠
     const [htmlCode, setHtmlCode] = useState<string>('');
-    // 수정됨 여부
-    const [modify, setModify] = useState<boolean>(false);
-
     /**
      * view API 불러오기
      */
@@ -26,7 +22,6 @@ const NoticeView = () => {
         setTitle(res.data.title);
         setDate(res.data.createDate);
         setHtmlCode(res.data.content);
-        setModify(res.data.isUpdate);
     };
 
     useEffect(() => {
@@ -41,11 +36,9 @@ const NoticeView = () => {
                     <h2 className="board-view-title__text">{title}</h2>
                     <p className="board-view-title__extra-info">
                         <span className="extra-info__date">{date}</span>
-                        {modify === true && <span className="extra-info__edit">수정됨</span>}
                     </p>
-
                 </div>
-                <article className="content" dangerouslySetInnerHTML={{ __html: htmlCode}}/>
+                <article className="content" dangerouslySetInnerHTML={{ __html: htmlCode }} />
             </section>
         </main>
     );
