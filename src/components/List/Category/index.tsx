@@ -1,7 +1,6 @@
 import { ICategoryProps, METHOD, TCategory } from 'lib/type';
 import fetcher from 'lib/api';
 import { useEffect, useState } from 'react';
-import cx from 'classnames';
 import './Category.scss';
 
 /**
@@ -10,7 +9,7 @@ import './Category.scss';
  * @param handleSelect {(value:string) => void}
  * @constructor
  */
-const Category = ({ value, handleSelect }:ICategoryProps) => {
+const Category = ({ value, handleSelect }: ICategoryProps) => {
     // 카테고리 리스트 api
     const [categoryList, setCategoryList] = useState<TCategory[]>([]);
     // 카테고리 active 활성화
@@ -39,12 +38,12 @@ const Category = ({ value, handleSelect }:ICategoryProps) => {
     }, []);
 
     return (
-        <ul className='board-category'>
+        <ul className="board-list-category">
             {categoryList.map((item: TCategory, index: number) => {
                 return (
-                    <li className={`category-item ${index === indexActive ? "active" : ""}`} onClick={() => handleButtonActive(index)}>
-                        <button type="button" onClick={() => handleSelect(item.id)} value={item.name} key={index}>
-                            <span className="category-item__text">{item.name}</span>
+                    <li className={`board-list-category__item ${index === indexActive?'board-list-category__item--active':''}`} onClick={() => handleButtonActive(index)} key={item.id}>
+                        <button type="button" onClick={() => handleSelect(item.id)} value={item.name}>
+                            <span className="board-list-category__text">{item.name}</span>
                         </button>
                     </li>
                 );

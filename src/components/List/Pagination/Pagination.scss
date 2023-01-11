@@ -1,0 +1,47 @@
+.pagination-wrap {
+    position: relative;
+    padding: 16px 0 24px;
+}
+
+.pagination {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    height: 40px;
+    .pagination-item {
+        width: 40px;
+        height: 40px;
+        &:not(:last-child) {
+            margin-right: 8px;
+        }
+        .button {
+            width: 40px;
+            height: 40px;
+            line-height: 100%;
+            color: #93989e;
+            font-size: 16px;
+            .pagination-item__text {
+                font-weight: 400;
+            }
+            svg {
+                path {
+                    stroke: #BEC1C5;
+                }
+            }
+        }
+        &.pagination-item__current-page {
+            .button {
+                color: #ff6c00;
+            }
+            .pagination-item__text {
+                font-weight: 700;
+            }
+        }
+        &.pagination--nondisplay-nav-item {
+            display: none;
+        }
+    }
+}

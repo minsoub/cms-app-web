@@ -30,15 +30,21 @@ const NoticeView = () => {
 
     return (
         <main className="board-view-wrap">
+            {/* 헤더 */}
             <Header />
-            <section className="sub-contents">
-                <div className="board-view-title">
-                    <h2 className="board-view-title__text">{title}</h2>
-                    <p className="board-view-title__extra-info">
+
+            {/* 제목 및 날짜 수정여부 */}
+            <section className="board-view">
+                <div className="board-view__title">
+                    <h2 className="board-view__text">{title}</h2>
+                    <p className="board-view__extra-info">
                         <span className="extra-info__date">{date}</span>
                     </p>
                 </div>
-                <article className="content" dangerouslySetInnerHTML={{ __html: htmlCode }} />
+
+
+                {/* 콘텐츠 영역*/}
+                <article className="board-view__content" dangerouslySetInnerHTML={{ __html: htmlCode }} />
             </section>
         </main>
     );

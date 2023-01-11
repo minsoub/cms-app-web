@@ -1,50 +1,50 @@
-.board-category {
+.board-list-category {
   padding: 16px 24px;
   white-space: nowrap;
   overflow-x: auto;
 }
 
-.board-category .category-item {
+.board-list-category__item {
+  &:not(:last-child) {
+    margin-right: 8px;
+  }
   display: inline-block;
   padding: 8px 12px;
   border-radius: 18px;
-  background: #f6f7f8;
+  background-color: #f6f7f8;
 }
 
-.board-category li:not(:last-child) {
-  margin-right: 8px;
-}
-
-.board-category.category-item__text {
+.board-list-category__text {
   font-size: 13px;
   font-weight: 400;
   color: #93989e;
 }
 
-.board-category .category-item.active {
-  background: #1c2028;
-  .category-item__text {
+.board-list-category__item--active {
+  background-color: #1c2028;
+  .board-list-category__text {
     font-weight: 500;
     color: #fff;
   }
 }
 
+
 @media (min-width: 600px) and (max-width: 1280px) {
-  .board-category {
+  .board-list-category {
     -ms-overflow-style: none;
   }
-  .board-category::-webkit-scrollbar{
+  .board-list-category::-webkit-scrollbar{
    display:none;
   }
   
 }
 
 @media (min-width: 1281px) {
-  .board-category {
+  .board-list-category {
     -ms-overflow-style: none;
   }
-  .board-category::-webkit-scrollbar{
+  .board-list-category::-webkit-scrollbar{
     display:none;
   }
-  
+
 }
