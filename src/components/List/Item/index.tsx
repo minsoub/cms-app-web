@@ -16,7 +16,7 @@ interface INoticeListProps {
 const Item = ({ type, title, createDate, id }: INoticeListProps) => {
     return (
         <li className={type} key={id}>
-            <Link to={`/notice/:${id}`}>
+            <Link to={`/notice/${id}`}>
                 <h4 className="board-list__title">{title}</h4>
                 <p className="board-list__date">{createDate}</p>
             </Link>
