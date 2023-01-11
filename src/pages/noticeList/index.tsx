@@ -6,6 +6,9 @@ import Pagination from 'components/List/Pagination';
 import fetcher from 'lib/api';
 import { METHOD, TNoticeList } from 'lib/type';
 import { boardDataState } from 'recoil/board/atom';
+import usePagenation from 'hooks/usePagenation';
+import './NoticeList.scss';
+
 import usePagination from 'hooks/usePagination';
 
 // 공지사항 리스트
@@ -56,31 +59,41 @@ const NoticeList = () => {
     }, [boardInfo.pageNumber, boardInfo.size]);
 
     return (
-        <main>
-            <h1>빗썸 공지사항</h1>
-
-            {/* 카테고리 */}
-            <Category handleSelect={handleCategorySelect} />
+        <main className="wrap">
+            <div className="header">
+                <h1 className="page-title">
+                    <span className="page-title__text">빗썸 공지사항</span>
+                </h1>
+                {/* 카테고리 */}
+                <Category handleSelect={handleCategorySelect}/>
+            </div>
 
             <hr />
 
             {/* 게시글 리스트 */}
-            <ul>
-                {/* 고정글 */}
-                {fixNotice.map((item: TNoticeList) => {
-                    return <Item title={item.title} createDate={item.createDate} id={item.id} />;
-                })}
-                {/* 일반글 */}
-                {notice.map((item: TNoticeList) => {
-                    return <Item title={item.title} createDate={item.createDate} id={item.id} />;
-                })}
-            </ul>
+            <section className="sub-contents">
+                {/* 게시글 리스트 */}
+                <ul className="board-list">
+                    {/* 고정글 */}
+                    {fixNotice?.map((item:TNoticeList) => {
+                        return (
+                            <Item type="fixed" title={item.title} create_date={item.createDate} id={item.id}/>
+                        )
+                    })}
+                    {/* 일반글 */}
+                    {notice?.map((item) => {
+                        return (
+                            <Item type="normal" title={item.title} create_date={item.createDate} id={item.id}/>
+                        )
+                    })}
+                </ul>
+            </section>
 
             <hr />
 
             {/* 페이징네이션 */}
             <Pagination onPageChange={handlePageChange} currentPage={boardInfo.pageNumber} paginationRange={paginationRange} totalCount={totalPageCount} />
-        </main>
+         </main>
     );
 };
 

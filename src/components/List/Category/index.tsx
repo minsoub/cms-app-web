@@ -2,6 +2,7 @@ import { ICategoryProps, METHOD, TCategory } from 'lib/type';
 import fetcher from 'lib/api';
 import { useEffect, useState } from 'react';
 import cx from 'classnames';
+import './Category.scss';
 
 /**
  * 카테고리 영역
@@ -9,7 +10,7 @@ import cx from 'classnames';
  * @param handleSelect {(value:string) => void}
  * @constructor
  */
-const Category = ({ value, handleSelect }: ICategoryProps) => {
+const Category = ({ value, handleSelect }:ICategoryProps) => {
     // 카테고리 리스트 api
     const [categoryList, setCategoryList] = useState<TCategory[]>([]);
     // 카테고리 active 활성화
@@ -38,12 +39,12 @@ const Category = ({ value, handleSelect }: ICategoryProps) => {
     }, []);
 
     return (
-        <ul>
-            {categoryList.map((item: TCategory) => {
+        <ul className='board-category'>
+            {categoryList.map((item: TCategory, index: number) => {
                 return (
-                    <li className={cx({ active: item.id === value })} onClick={() => handleButtonActive(item)} key={item.id}>
-                        <button type="button" onClick={() => handleSelect(item.id)} value={item.name}>
-                            {item.name}
+                    <li className={`category-item ${index === indexActive ? "active" : ""}`} onClick={() => handleButtonActive(index)}>
+                        <button type="button" onClick={() => handleSelect(item.id)} value={item.name} key={index}>
+                            <span className="category-item__text">{item.name}</span>
                         </button>
                     </li>
                 );

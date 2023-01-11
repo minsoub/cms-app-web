@@ -4,6 +4,7 @@ interface INoticeListProps {
     id: string; // 게시글 id
     title: string; // 제목
     createDate: string; // 작성일
+    type: string;
 }
 
 /**
@@ -12,12 +13,12 @@ interface INoticeListProps {
  * @param id {string}
  * @constructor
  */
-const Item = ({ title, createDate, id }: INoticeListProps) => {
+const Item = ({ type, title, createDate, id }: INoticeListProps) => {
     return (
-        <li key={id}>
-            <Link to={`/notice/${id}`}>
-                <h4>{title}</h4>
-                <p>{createDate}</p>
+        <li className={type} key={id}>
+            <Link to={`/notice/:${id}`}>
+                <h4 className="board-list__title">{title}</h4>
+                <p className="board-list__date">{createDate}</p>
             </Link>
         </li>
     );
