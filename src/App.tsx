@@ -10,8 +10,8 @@ function App() {
         <RecoilRoot>
             <Router>
                 <Routes>
-                    <Route path="/notice" element={<NoticeList />} />
-                    <Route path="/notice/:boardID" element={<NoticeView />} />
+                    <Route path="/" element={<NoticeList />} />
+                    <Route path="/:boardID" element={<NoticeView />} />
                     {/* 404 페이지 */}
                     {/*<Route path="/*" element={<NoData />} />*/}
                 </Routes>
