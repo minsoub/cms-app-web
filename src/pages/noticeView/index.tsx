@@ -14,8 +14,6 @@ const NoticeView = () => {
     const [date, setDate] = useState<string>('');
     // 콘텐츠
     const [htmlCode, setHtmlCode] = useState<string>('');
-    // 수정됨 여부
-    const [modify, setModify] = useState<boolean>(false);
 
     /**
      * view API 불러오기
@@ -25,7 +23,6 @@ const NoticeView = () => {
         setTitle(res.data.title);
         setDate(res.data.createDate);
         setHtmlCode(res.data.content);
-        setModify(res.data.isUpdate);
     };
 
     useEffect(() => {
@@ -43,10 +40,8 @@ const NoticeView = () => {
                     <h2 className="board-view__text">{title}</h2>
                     <p className="board-view__extra-info">
                         <span className="extra-info__date">{date}</span>
-                        {modify && <span className="extra-info__edit">수정됨</span>}
                     </p>
                 </div>
-            
 
                 {/* 콘텐츠 영역*/}
                 <article className="board-view__content" dangerouslySetInnerHTML={{ __html: htmlCode }} />
