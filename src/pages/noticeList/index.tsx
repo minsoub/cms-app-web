@@ -29,7 +29,6 @@ const NoticeList = () => {
      */
     const getList = async () => {
         const res = await fetcher(METHOD.GET, `/api/v1/cms/notices?pageNo=${boardInfo.pageNumber}&pageSize=${boardInfo.size}`);
-        console.log('게시글 리스트 res--->', res);
 
         if (res.result === 'SUCCESS') {
             setBoardInfo((prev) => ({ ...prev, totalElements: res.data.list.totalElements, totalPages: res.data.list.totalPages }));
@@ -80,7 +79,7 @@ const NoticeList = () => {
             </section>
 
             {/* 페이징네이션 */}
-            <Pagination onPageChange={handlePageChange} totalElements={boardInfo.totalElements} currentPage={boardInfo.pageNumber} paginationRange={paginationRange} totalCount={totalPageCount} activePage={boardInfo.pageNumber} />
+            <Pagination onPageChange={handlePageChange} totalElements={boardInfo.totalElements} currentPage={boardInfo.pageNumber} paginationRange={paginationRange} totalCount={totalPageCount} activePage={boardInfo.pageNumber} totalPages={boardInfo.totalPages}/>
         </main>
     );
 };

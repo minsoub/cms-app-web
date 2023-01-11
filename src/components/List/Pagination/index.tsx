@@ -7,21 +7,17 @@ import RightArrow from './Arrows/RightArrow';
 import './Pagination.scss';
 
 type TPaginationProp = {
-    // 페이지 변경
-    onPageChange: (v: number) => void;
-    // 현재 페이지
-    currentPage: number;
-    paginationRange: number[];
-    // 총 페이지
-    totalCount: number;
-    // 총 게시물
-    totalElements: number;
-    // focus된 페이지
-    activePage: number;
+    onPageChange: (v: number) => void; // 페이지 변경
+    currentPage: number; // 현재 페이지
+    paginationRange: number[]; // 페이징네이션 숫자
+    totalCount: number; // 총 페이지
+    totalElements: number; // 총 게시물
+    activePage: number; // focus 된 페이지
+    totalPages: number; // 페이지 끝
 };
 
-const Pagination = ({ activePage, onPageChange, currentPage, paginationRange, totalElements }: TPaginationProp) => {
-    // 현재 보여질 페이지들의 갯수
+const Pagination = ({ activePage, onPageChange, currentPage, paginationRange, totalElements, totalPages }: TPaginationProp) => {
+    // 현재 보여질 페이지 넘버 갯수
     const [pageCount, setPageCount] = useState<number>(3);
     // 현재 페이지 그룹
     const currentPageGroup = useMemo(() => Math.ceil(currentPage / pageCount), [currentPage, pageCount]);
@@ -30,39 +26,43 @@ const Pagination = ({ activePage, onPageChange, currentPage, paginationRange, to
 
     useEffect(() => {
         console.log('current--->', currentPageGroup, 'totalPageGroup--->', totalPageGroup, 'pageCount', pageCount);
-    }, [currentPageGroup, totalPageGroup]);
+        console.log('activePage--->', activePage);
+        console.log('activePage--->', activePage);
+        console.log('totalPages--->', totalPages);
+    }, [currentPageGroup, totalPageGroup, activePage, totalPages]);
+
     /**
      * 제일 첫 페이지
      */
-    const onFirst = () => {
+    const handleFirst = () => {
         onPageChange(1);
     };
 
     /**
      * 제일 끝 페이지
      */
-    const onLast = () => {
-        onPageChange(totalElements);
+    const handleLast = () => {
+        onPageChange(totalPages);
     };
 
     /**
      * 다음 페이지
      */
-    const onNext = () => {
+    const handleNext = () => {
         onPageChange(currentPage + 1);
     };
 
     /**
      * 이전 페이지
      */
-    const onPrev = () => {
+    const handlePrev = () => {
         onPageChange(currentPage - 1);
     };
 
+    /**
+     * 첫 페이지 & 마지막 페이지 목록은 5개, 나머지는 3개
+     */
     useEffect(() => {
-        /**
-         * 첫/마지막 페이지그룹은 5개, 나머지는 3개
-         */
         if (currentPage < 5 || currentPage > totalElements - 5) {
             setPageCount(5);
         } else {
@@ -70,15 +70,13 @@ const Pagination = ({ activePage, onPageChange, currentPage, paginationRange, to
         }
     }, [currentPage, totalElements]);
 
-    if (currentPage === 0 || paginationRange.length < 2) return null;
-
     return (
         <nav className={cx('pagination-wrap')}>
             <ul className={cx('pagination')}>
                 {/* 첫 페이지로 */}
-                <li className={cx('pagination-item', { 'pagination--nondisplay-nav-item': currentPage > totalElements - 5 })}>
+                <li className={cx('pagination-item', { 'pagination--nondisplay-nav-item': activePage > totalElements - 5 })}>
                     {currentPageGroup > 1 && currentPageGroup < totalPageGroup && (
-                        <button className={cx('button', 'button-arrow')} type="button" onClick={onFirst}>
+                        <button className={cx('button', 'button-arrow')} type="button" onClick={handleFirst}>
                             <FirstArrow />
                         </button>
                     )}
@@ -86,34 +84,38 @@ const Pagination = ({ activePage, onPageChange, currentPage, paginationRange, to
                 {/* 이전 페이지 */}
                 {currentPageGroup > 1 && (
                     <li className={cx('pagination-item')}>
-                        <button className={cx('button', 'button-arrow')} type="button" onClick={onPrev}>
+                        <button className={cx('button', 'button-arrow')} type="button" onClick={handlePrev}>
                             <LeftArrow />
                         </button>
                     </li>
                 )}
-                {paginationRange.map((v) => (
-                    <li key={v} className={cx('pagination-item', { 'pagination-item__current-page': currentPage === v })}>
-                        <button className={cx('button')} onClick={() => onPageChange(v)}>
-                            <span className={cx('pagination-item__text')}>{v}</span>
+
+                {/* 페이지 넘버 */}
+                {paginationRange.map((currentNumber) => (
+                    <li key={currentNumber} className={cx('pagination-item', { 'pagination-item__current-page': activePage === currentNumber })}>
+                        <button className={cx('button')} onClick={() => onPageChange(currentNumber)}>
+                            <span className={cx('pagination-item__text')}>{currentNumber}</span>
                         </button>
                     </li>
                 ))}
+
                 {/* 다음 페이지 */}
                 {currentPageGroup < totalPageGroup && (
-                    <li className={cx('pagination-item')}>
-                        <button className={cx('button', 'button-arrow')} type="button" onClick={onNext}>
+                    <li className={cx('pagination-item', { 'pagination--nondisplay-nav-item': currentPage > totalPages - 1 })}>
+                        <button className={cx('button', 'button-arrow')} type="button" onClick={handleNext}>
                             <RightArrow />
                         </button>
                     </li>
                 )}
+
                 {/* 마지막 페이지 */}
-                <li className={cx('pagination-item', { 'pagination--active-nav-item': currentPage < totalElements - 5 })}>
-                    {currentPageGroup > 1 && currentPageGroup < 4 && (
-                        <button className={cx('button', 'button-arrow')} type="button" onClick={onLast}>
+                {currentPageGroup > 0 && (
+                    <li className={cx('pagination-item', { 'pagination--nondisplay-nav-item': currentPage === totalPages })}>
+                        <button className={cx('button', 'button-arrow')} type="button" onClick={handleLast}>
                             <LastArrow />
                         </button>
-                    )}
-                </li>
+                    </li>
+                )}
             </ul>
         </nav>
     );
