@@ -4,7 +4,7 @@ import FirstArrow from './Arrows/FirstArrow';
 import LastArrow from './Arrows/LastArrow';
 import LeftArrow from './Arrows/LeftArrow';
 import RightArrow from './Arrows/RightArrow';
-import './Pagenation.scss';
+import './Pagination.scss';
 
 type TPaginationProp = {
     // 페이지 변경
