@@ -80,7 +80,7 @@ const NoticeList = () => {
             </section>
 
             {/* 페이징네이션 */}
-            <Pagination onPageChange={handlePageChange} totalElements={boardInfo.totalElements} currentPage={boardInfo.pageNumber} paginationRange={paginationRange} totalCount={totalPageCount} />
+            <Pagination onPageChange={handlePageChange} totalElements={boardInfo.totalElements} currentPage={boardInfo.pageNumber} paginationRange={paginationRange} totalCount={totalPageCount} activePage={boardInfo.pageNumber} />
         </main>
     );
 };
