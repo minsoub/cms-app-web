@@ -4,25 +4,44 @@ import FirstArrow from './Arrows/FirstArrow';
 import LastArrow from './Arrows/LastArrow';
 import LeftArrow from './Arrows/LeftArrow';
 import RightArrow from './Arrows/RightArrow';
+import { range } from 'utils/helpers';
 import './Pagination.scss';
 
 type TPaginationProp = {
     onPageChange: (v: number) => void; // 페이지 변경
     currentPage: number; // 현재 페이지
-    paginationRange: number[]; // 페이징네이션 숫자
-    totalCount: number; // 총 페이지
     totalElements: number; // 총 게시물
-    activePage: number; // focus 된 페이지
     totalPages: number; // 페이지 끝
 };
 
-const Pagination = ({ activePage, onPageChange, currentPage, paginationRange, totalElements, totalPages }: TPaginationProp) => {
-    // 현재 보여질 페이지 넘버 갯수
-    const [pageCount, setPageCount] = useState<number>(3);
+const Pagination = ({ onPageChange, currentPage, totalElements, totalPages }: TPaginationProp) => {
+    // 현재 보여질 페이지 넘버 영역 갯수
+    const pageCount = useMemo(() => {
+        if (currentPage < 5) {
+            return 5;
+        } else if (currentPage === totalPages) {
+            return 5;
+        } else {
+            return 3;
+        }
+    }, [currentPage, totalPages]);
+
     // 현재 페이지 그룹
     const currentPageGroup = useMemo(() => Math.ceil(currentPage / pageCount), [currentPage, pageCount]);
     // 전체 페이징 네이션
     const totalPageGroup = useMemo(() => Math.ceil(totalElements / pageCount), [totalElements, pageCount]);
+
+    const paginationRange = useMemo(() => {
+        const currentPageGroup = Math.ceil(currentPage / pageCount);
+        let lastPageInGroup = currentPageGroup * pageCount;
+
+        if (lastPageInGroup > totalPages) {
+            lastPageInGroup = totalPages;
+        }
+        const firstPageInGroup = lastPageInGroup - (pageCount - 1);
+
+        return range(firstPageInGroup, lastPageInGroup);
+    }, [currentPage, totalPages, pageCount]);
     /**
      * 제일 첫 페이지
      */
@@ -55,8 +74,8 @@ const Pagination = ({ activePage, onPageChange, currentPage, paginationRange, to
         <nav className={cx('pagination-wrap')}>
             <ul className={cx('pagination')}>
                 {/* 첫 페이지로 */}
-                <li className={cx('pagination-item', { 'pagination--nondisplay-nav-item': activePage > totalElements - 5 })}>
-                    {currentPageGroup > 1 && currentPageGroup < totalPageGroup && (
+                <li className={cx('pagination-item', { 'pagination--nondisplay-nav-item': currentPage > totalElements - 5 })}>
+                    {currentPageGroup > 1 && currentPageGroup < totalPages && (
                         <button className={cx('button', 'button-arrow')} type="button" onClick={handleFirst}>
                             <FirstArrow />
                         </button>
@@ -72,10 +91,10 @@ const Pagination = ({ activePage, onPageChange, currentPage, paginationRange, to
                 )}
 
                 {/* 페이지 넘버 */}
-                {paginationRange.map((currentNumber) => (
-                    <li key={currentNumber} className={cx('pagination-item', { 'pagination-item__current-page': activePage === currentNumber })}>
-                        <button className={cx('button')} onClick={() => onPageChange(currentNumber)}>
-                            <span className={cx('pagination-item__text')}>{currentNumber}</span>
+                {paginationRange.map((pageNumber) => (
+                    <li key={pageNumber} className={cx('pagination-item', { 'pagination-item__current-page': currentPage === pageNumber })}>
+                        <button className={cx('button')} onClick={() => onPageChange(pageNumber)}>
+                            <span className={cx('pagination-item__text')}>{pageNumber}</span>
                         </button>
                     </li>
                 ))}

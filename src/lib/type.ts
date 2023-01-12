@@ -1,8 +1,6 @@
-
-
 // API 통신 메서드
 export enum METHOD {
-    GET = 'get',
+    GET = 'get'
 }
 
 export interface IItemProps {
@@ -23,10 +21,10 @@ export interface IPath {
 
 export type TPagination = {
     totalPages: number;
-    numberOfElements: number;
+    totalElements: number;
     size: number;
     pageNumber: number;
-    categoryId: string;
+    categoryId?: string;
 };
 
 // 게시물 pagination

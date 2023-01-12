@@ -6,7 +6,6 @@ import Pagination from 'components/List/Pagination';
 import fetcher from 'lib/api';
 import { METHOD, TNoticeList } from 'lib/type';
 import { boardDataState } from 'recoil/board/atom';
-import usePagination from 'hooks/usePagination';
 import './NoticeList.scss';
 
 // 공지사항 리스트
@@ -18,12 +17,6 @@ const NoticeList = () => {
     // 게시판 info
     const [boardInfo, setBoardInfo] = useRecoilState(boardDataState);
 
-    const { paginationRange, totalPageCount } = usePagination({
-        pageNumber: boardInfo.pageNumber,
-        numberOfElements: boardInfo.numberOfElements,
-        pageSize: boardInfo.size
-    });
-
     /**
      * 게시글 리스트 API 불러오기
      */
@@ -34,7 +27,6 @@ const NoticeList = () => {
             categoryId: boardInfo.categoryId
         });
 
-        console.log('categoryId', boardInfo.categoryId);
         if (res.result === 'SUCCESS') {
             console.log('하이', res.data);
             setBoardInfo((prev) => ({ ...prev, totalElements: res.data.list.totalElements, totalPages: res.data.list.totalPages }));
@@ -48,7 +40,7 @@ const NoticeList = () => {
      * @param value {string}
      */
     const handleCategorySelect = (categoryId: string) => {
-        setBoardInfo((prev) => ({ ...prev, categoryId: categoryId }));
+        setBoardInfo((prev) => ({ ...prev, categoryId: categoryId, pageNumber: 1 }));
     };
 
     /**
@@ -107,14 +99,11 @@ const NoticeList = () => {
             </section>
 
             {/* 페이징네이션 게시글 15개 이상이어야 pagination 노출 */}
-            {boardInfo.numberOfElements > 16 && (
+            {boardInfo.totalElements > 15 && (
                 <Pagination
                     onPageChange={handlePageChange}
-                    totalElements={boardInfo.numberOfElements}
+                    totalElements={boardInfo.totalElements}
                     currentPage={boardInfo.pageNumber}
-                    paginationRange={paginationRange}
-                    totalCount={totalPageCount}
-                    activePage={boardInfo.pageNumber}
                     totalPages={boardInfo.totalPages}
                 />
             )}

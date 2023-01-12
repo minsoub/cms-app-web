@@ -32,7 +32,6 @@ const Category = ({ handleSelect }: ICategoryProps) => {
     return (
         <ul className="board-list-category">
             {categoryList.map((item: TCategory) => {
-                console.log('item--->', item);
                 return (
                     <li
                         className={`board-list-category__item ${
