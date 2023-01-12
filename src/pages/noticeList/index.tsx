@@ -20,17 +20,23 @@ const NoticeList = () => {
 
     const { paginationRange, totalPageCount } = usePagination({
         pageNumber: boardInfo.pageNumber,
-        totalElements: boardInfo.totalElements,
-        pageSize: boardInfo.size,
+        numberOfElements: boardInfo.numberOfElements,
+        pageSize: boardInfo.size
     });
 
     /**
      * 게시글 리스트 API 불러오기
      */
     const getList = async () => {
-        const res = await fetcher(METHOD.GET, `/api/v1/cms/notices?pageNo=${boardInfo.pageNumber}&pageSize=${boardInfo.size}`);
+        const res = await fetcher(METHOD.GET, `/api/v1/cms/notices`, {
+            pageNo: boardInfo.pageNumber,
+            pageSize: boardInfo.size,
+            categoryId: boardInfo.categoryId
+        });
 
+        console.log('categoryId', boardInfo.categoryId);
         if (res.result === 'SUCCESS') {
+            console.log('하이', res.data);
             setBoardInfo((prev) => ({ ...prev, totalElements: res.data.list.totalElements, totalPages: res.data.list.totalPages }));
             setNotice(res.data.list.content);
             setFixNotice(res.data.fix);
@@ -41,7 +47,9 @@ const NoticeList = () => {
      * 카테고리 선택
      * @param value {string}
      */
-    const handleCategorySelect = (value: string) => {};
+    const handleCategorySelect = (categoryId: string) => {
+        setBoardInfo((prev) => ({ ...prev, categoryId: categoryId }));
+    };
 
     /**
      * 페이지 변경
@@ -53,7 +61,11 @@ const NoticeList = () => {
 
     useEffect(() => {
         getList();
-    }, [boardInfo.pageNumber, boardInfo.size]);
+    }, [boardInfo.pageNumber, boardInfo.size, boardInfo.categoryId]);
+
+    useEffect(() => {
+        console.log({ boardInfo });
+    }, [boardInfo]);
 
     return (
         <main className="board-list-wrap">
@@ -69,17 +81,43 @@ const NoticeList = () => {
                 <ul className="board-list">
                     {/* 고정글 */}
                     {fixNotice.map((item: TNoticeList) => {
-                        return <Item type="board-list__item--fixed" title={item.title} createDate={item.createDate} id={item.id} />;
+                        return (
+                            <Item
+                                type="board-list__item--fixed"
+                                title={item.title}
+                                createDate={item.createDate}
+                                id={item.id}
+                                key={item.id}
+                            />
+                        );
                     })}
                     {/* 일반글 */}
                     {notice.map((item: TNoticeList) => {
-                        return <Item type="board-list__item--normal" title={item.title} createDate={item.createDate} id={item.id} />;
+                        return (
+                            <Item
+                                type="board-list__item--normal"
+                                title={item.title}
+                                createDate={item.createDate}
+                                id={item.id}
+                                key={item.id}
+                            />
+                        );
                     })}
                 </ul>
             </section>
 
-            {/* 페이징네이션 */}
-            <Pagination onPageChange={handlePageChange} totalElements={boardInfo.totalElements} currentPage={boardInfo.pageNumber} paginationRange={paginationRange} totalCount={totalPageCount} activePage={boardInfo.pageNumber} totalPages={boardInfo.totalPages}/>
+            {/* 페이징네이션 게시글 15개 이상이어야 pagination 노출 */}
+            {boardInfo.numberOfElements > 16 && (
+                <Pagination
+                    onPageChange={handlePageChange}
+                    totalElements={boardInfo.numberOfElements}
+                    currentPage={boardInfo.pageNumber}
+                    paginationRange={paginationRange}
+                    totalCount={totalPageCount}
+                    activePage={boardInfo.pageNumber}
+                    totalPages={boardInfo.totalPages}
+                />
+            )}
         </main>
     );
 };

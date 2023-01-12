@@ -12,6 +12,7 @@
     "@types/react-dom": "^18.0.9",
     "axios": "^1.2.1",
     "classnames": "^2.3.2",
+    "dayjs": "^1.11.7",
     "env-cmd": "^10.1.0",
     "json-server": "^0.17.1",
     "node-sass": "^8.0.0",
@@ -50,7 +51,11 @@
     ]
   },
   "devDependencies": {
-    "prettier": "2.8.1"
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-standard": "^5.0.0",
+    "prettier": "^2.8.2"
   },
   "packageManager": "yarn@3.3.1",
   "proxy": "http://cms-gateway-api.bithumbsystems.com"

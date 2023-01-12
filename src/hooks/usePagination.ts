@@ -1,26 +1,31 @@
 import { useMemo } from 'react';
 
-type Prop = {
-    pageNumber: number;
-    totalElements: number;
-    pageSize: number;
+type PaginationProp = {
+    pageNumber: number; // 현재 페이지
+    numberOfElements: number; // 전체 게시글 수
+    pageSize: number; // 한 페이지당 게시글 제한수
 };
 
-const usePagination = ({ pageNumber, totalElements, pageSize }: Prop) => {
+/**
+ * @param pageNumber {number}
+ * @param totalElements {number}
+ * @param pageSize {number}
+ */
+const usePagination = ({ pageNumber, numberOfElements, pageSize }: PaginationProp) => {
     const range = (start: number, end: number) => {
         const length = end - start + 1;
         return Array.from({ length }, (_, index) => index + start);
     };
 
     const totalPageCount = useMemo(() => {
-        return Math.ceil(totalElements / pageSize);
-    }, [totalElements, pageSize]);
+        return Math.ceil(numberOfElements / pageSize);
+    }, [numberOfElements, pageSize]);
 
     // paginationRange 표시개수
     const pageCount = useMemo(() => {
         if (pageNumber < 5) {
             return 5;
-        } else if (pageNumber > totalPageCount - 2) {
+        } else if (pageNumber === totalPageCount) {
             return 5;
         } else {
             return 3;
@@ -42,7 +47,7 @@ const usePagination = ({ pageNumber, totalElements, pageSize }: Prop) => {
 
     return {
         paginationRange,
-        totalPageCount,
+        totalPageCount
     };
 };
 

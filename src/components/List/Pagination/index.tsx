@@ -23,14 +23,6 @@ const Pagination = ({ activePage, onPageChange, currentPage, paginationRange, to
     const currentPageGroup = useMemo(() => Math.ceil(currentPage / pageCount), [currentPage, pageCount]);
     // 전체 페이징 네이션
     const totalPageGroup = useMemo(() => Math.ceil(totalElements / pageCount), [totalElements, pageCount]);
-
-    useEffect(() => {
-        console.log('current--->', currentPageGroup, 'totalPageGroup--->', totalPageGroup, 'pageCount', pageCount);
-        console.log('activePage--->', activePage);
-        console.log('activePage--->', activePage);
-        console.log('totalPages--->', totalPages);
-    }, [currentPageGroup, totalPageGroup, activePage, totalPages]);
-
     /**
      * 제일 첫 페이지
      */
@@ -58,17 +50,6 @@ const Pagination = ({ activePage, onPageChange, currentPage, paginationRange, to
     const handlePrev = () => {
         onPageChange(currentPage - 1);
     };
-
-    /**
-     * 첫 페이지 & 마지막 페이지 목록은 5개, 나머지는 3개
-     */
-    useEffect(() => {
-        if (currentPage < 5 || currentPage > totalElements - 5) {
-            setPageCount(5);
-        } else {
-            setPageCount(3);
-        }
-    }, [currentPage, totalElements]);
 
     return (
         <nav className={cx('pagination-wrap')}>

@@ -13,8 +13,7 @@ export interface IItemProps {
 }
 
 export interface ICategoryProps {
-    value?: string;
-    handleSelect: (value: string) => void;
+    handleSelect: (value: string) => void; // 카테고리 선택
 }
 
 // 게시글 파라미터
@@ -24,9 +23,10 @@ export interface IPath {
 
 export type TPagination = {
     totalPages: number;
-    totalElements: number;
+    numberOfElements: number;
     size: number;
     pageNumber: number;
+    categoryId: string;
 };
 
 // 게시물 pagination
