@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { getDateFormat } from 'utils/helpers';
 
 interface INoticeListProps {
     id: string; // 게시글 id
@@ -19,7 +20,7 @@ const Item = ({ title, createDate, id, type }: INoticeListProps) => {
         <li className={`board-list__item ${type}`} key={id}>
             <Link className="board-list__link" to={`/${id}`}>
                 <h4 className="board-list__title">{title}</h4>
-                <p className="board-list__date">{createDate}</p>
+                <p className="board-list__date">{getDateFormat(createDate)}</p>
             </Link>
         </li>
     );

@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import fetcher from 'lib/api';
 import { METHOD } from 'lib/type';
 import { useParams } from 'react-router-dom';
+import { getDateFormat } from 'utils/helpers';
+
 import './NoticeView.scss';
 
 // 공지사항 Detail 페이지
@@ -46,7 +48,7 @@ const NoticeView = () => {
                 <div className="board-view__title">
                     <h2 className="board-view__text">{title}</h2>
                     <p className="board-view__extra-info">
-                        <span className="extra-info__date">{date}</span>
+                        <span className="extra-info__date">{getDateFormat(date)}</span>
                     </p>
                 </div>
 
