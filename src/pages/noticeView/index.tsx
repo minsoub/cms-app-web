@@ -24,9 +24,16 @@ const NoticeView = () => {
         setDate(res.data.createDate);
         setHtmlCode(res.data.content);
     };
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'auto'
+        });
+    };
 
     useEffect(() => {
         getView();
+        scrollToTop();
     }, []);
 
     return (
