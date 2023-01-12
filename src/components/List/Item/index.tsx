@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { boardDataState } from '../../../recoil/board/atom';
+import { getDateFormat } from 'utils/helpers';
 import { useEffect } from 'react';
 
 interface INoticeListProps {
@@ -28,7 +29,8 @@ const Item = ({ title, createDate, id, type }: INoticeListProps) => {
                     <span>&#91;{boardInfo.categoryId}&#93;</span>
                     {title}
                 </h4>
-                <p className="board-list__date">{createDate}</p>
+                <p className="board-list__date">{getDateFormat(createDate)}</p>
+                <h4 className="board-list__title">{title}</h4>
             </Link>
         </li>
     );
