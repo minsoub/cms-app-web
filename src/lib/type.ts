@@ -11,7 +11,7 @@ export interface IItemProps {
 }
 
 export interface ICategoryProps {
-    handleSelect: (value: string) => void; // 카테고리 선택
+    handleSelect: (value?: string) => void; // 카테고리 선택
 }
 
 // 게시글 파라미터

@@ -39,7 +39,7 @@ const NoticeList = () => {
      * 카테고리 선택
      * @param value {string}
      */
-    const handleCategorySelect = (categoryId: string) => {
+    const handleCategorySelect = (categoryId?: string) => {
         setBoardInfo((prev) => ({ ...prev, categoryId: categoryId, pageNumber: 1 }));
     };
 

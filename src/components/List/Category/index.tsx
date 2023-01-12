@@ -31,6 +31,11 @@ const Category = ({ handleSelect }: ICategoryProps) => {
 
     return (
         <ul className="board-list-category">
+            <li className={`board-list-category__item ${!categoryInfo.categoryId ? 'board-list-category__item--active' : ''}`}>
+                <button type="button" onClick={() => handleSelect(undefined)}>
+                    <span className="board-list-category__text">전체</span>
+                </button>
+            </li>
             {categoryList.map((item: TCategory) => {
                 return (
                     <li
@@ -39,7 +44,7 @@ const Category = ({ handleSelect }: ICategoryProps) => {
                         }`}
                         key={item.id}
                     >
-                        <button type="button" onClick={() => handleSelect(item.id)} value={item.name}>
+                        <button type="button" onClick={() => handleSelect(item.id)}>
                             <span className="board-list-category__text">{item.name}</span>
                         </button>
                     </li>
