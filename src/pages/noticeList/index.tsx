@@ -105,6 +105,7 @@ const NoticeList = () => {
                     totalElements={boardInfo.totalElements}
                     currentPage={boardInfo.pageNumber}
                     totalPages={boardInfo.totalPages}
+                    pageSize={boardInfo.size}
                 />
             )}
         </main>

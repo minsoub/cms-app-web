@@ -12,13 +12,18 @@ type TPaginationProp = {
     currentPage: number; // 현재 페이지
     totalElements: number; // 총 게시물
     totalPages: number; // 페이지 끝
+    pageSize: number; // 페이지 사이즈
 };
 
-const Pagination = ({ onPageChange, currentPage, totalElements, totalPages }: TPaginationProp) => {
+const Pagination = ({ onPageChange, currentPage, totalElements, totalPages, pageSize }: TPaginationProp) => {
     // 현재 보여질 페이지 넘버 영역 갯수
     const pageCount = useMemo(() => {
         if (currentPage < 5) {
-            return 5;
+            if (totalPages < 6) {
+                return Math.ceil(totalElements / pageSize);
+            } else {
+                return 5;
+            }
         } else if (currentPage === totalPages) {
             return 5;
         } else {
@@ -82,7 +87,7 @@ const Pagination = ({ onPageChange, currentPage, totalElements, totalPages }: TP
                     )}
                 </li>
                 {/* 이전 페이지 */}
-                {currentPageGroup > 1 && (
+                {currentPage > 1 && (
                     <li className={cx('pagination-item')}>
                         <button className={cx('button', 'button-arrow')} type="button" onClick={handlePrev}>
                             <LeftArrow />
@@ -100,7 +105,7 @@ const Pagination = ({ onPageChange, currentPage, totalElements, totalPages }: TP
                 ))}
 
                 {/* 다음 페이지 */}
-                {currentPageGroup < totalPageGroup && (
+                {currentPage < totalPages && (
                     <li className={cx('pagination-item', { 'pagination--nondisplay-nav-item': currentPage > totalPages - 1 })}>
                         <button className={cx('button', 'button-arrow')} type="button" onClick={handleNext}>
                             <RightArrow />
@@ -109,7 +114,7 @@ const Pagination = ({ onPageChange, currentPage, totalElements, totalPages }: TP
                 )}
 
                 {/* 마지막 페이지 */}
-                {currentPageGroup > 0 && (
+                {currentPage < totalPages && currentPageGroup > 0 && (
                     <li className={cx('pagination-item', { 'pagination--nondisplay-nav-item': currentPage === totalPages })}>
                         <button className={cx('button', 'button-arrow')} type="button" onClick={handleLast}>
                             <LastArrow />
