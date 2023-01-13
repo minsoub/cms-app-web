@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
-import cx from 'classnames';
 import FirstArrow from './Arrows/FirstArrow';
 import LastArrow from './Arrows/LastArrow';
 import LeftArrow from './Arrows/LeftArrow';
 import RightArrow from './Arrows/RightArrow';
 import { range } from 'utils/helpers';
+import cx from 'classnames';
 import './Pagination.scss';
 
 type TPaginationProp = {

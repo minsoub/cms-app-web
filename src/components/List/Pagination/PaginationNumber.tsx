@@ -1,13 +1,15 @@
 type TPaginationNumberProp = {
-    num: number;
-    isCurrent: boolean;
-    onClick: () => void;
+    num: number; // 페이지 넘버
+    isCurrent: boolean; // 현재위치
+    onClick: () => void; // 클릭한 페이지
 };
 
-const PaginationNumber = ({ num, isCurrent, onClick }: TPaginationNumberProp) => (
-    <span className={isCurrent ? 'active' : ''} onClick={onClick}>
-        {num}
-    </span>
-);
+const PaginationNumber = ({ num, isCurrent, onClick }: TPaginationNumberProp) => {
+    return (
+        <span className={isCurrent ? 'active' : ''} onClick={onClick}>
+            {num}
+        </span>
+    );
+};
 
 export default PaginationNumber;
