@@ -12,8 +12,6 @@ function App() {
                 <Routes>
                     <Route path="/" element={<NoticeList />} />
                     <Route path="/:boardID" element={<NoticeView />} />
-                    {/* 404 페이지 */}
-                    {/*<Route path="/*" element={<NoData />} />*/}
                 </Routes>
             </Router>
         </RecoilRoot>
