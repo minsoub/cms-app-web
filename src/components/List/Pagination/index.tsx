@@ -80,7 +80,7 @@ const Pagination = ({ onPageChange, currentPage, totalElements, totalPages, page
         <nav className={cx('pagination-wrap')}>
             <ul className={cx('pagination')}>
                 {/* 첫 페이지로 */}
-                {currentPageGroup > 1 && currentPageGroup < totalPages && (
+                {currentPage > 4 && currentPageGroup < totalPages && currentPage !== totalPages && (
                     <li className={cx('pagination-item', { 'pagination--nondisplay-nav-item': currentPage > totalElements - 5 })}>
                         <button className={cx('button', 'button-arrow')} type="button" onClick={handleFirst}>
                             <FirstArrow />
@@ -89,7 +89,7 @@ const Pagination = ({ onPageChange, currentPage, totalElements, totalPages, page
                 )}
 
                 {/* 이전 페이지 */}
-                {currentPage > 1 && (
+                {currentPage > 4 && (
                     <li className={cx('pagination-item')}>
                         <button className={cx('button', 'button-arrow')} type="button" onClick={handlePrev}>
                             <LeftArrow />
@@ -116,7 +116,7 @@ const Pagination = ({ onPageChange, currentPage, totalElements, totalPages, page
                 )}
 
                 {/* 마지막 페이지 */}
-                {currentPage < totalPages && currentPageGroup > 0 && (
+                {currentPage > 4 && currentPage < totalPages && currentPageGroup > 0  && (
                     <li className={cx('pagination-item', { 'pagination--nondisplay-nav-item': currentPage === totalPages })}>
                         <button className={cx('button', 'button-arrow')} type="button" onClick={handleLast}>
                             <LastArrow />
