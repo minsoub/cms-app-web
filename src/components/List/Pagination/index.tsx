@@ -7,7 +7,7 @@ import { range } from 'utils/helpers';
 import cx from 'classnames';
 import './Pagination.scss';
 
-type TPaginationProp = {
+interface IPaginationProp {
     onPageChange: (pagePostion: number) => void; // 페이지 변경
     currentPage: number; // 현재 페이지
     totalElements: number; // 총 게시물
@@ -15,7 +15,7 @@ type TPaginationProp = {
     pageSize: number; // 페이지 사이즈
 };
 
-const Pagination = ({ onPageChange, currentPage, totalElements, totalPages, pageSize }: TPaginationProp) => {
+const Pagination = ({ onPageChange, currentPage, totalElements, totalPages, pageSize }: IPaginationProp) => {
     // 현재 보여질 페이지 넘버 영역 갯수
     const pageCount = useMemo(() => {
         if (currentPage < 5) {

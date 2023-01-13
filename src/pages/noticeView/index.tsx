@@ -1,14 +1,14 @@
 import Header from 'components/View/Header';
 import { useEffect, useState } from 'react';
 import fetcher from 'lib/api';
-import { METHOD } from 'lib/type';
+import { EMehod } from 'lib/type';
 import { useParams } from 'react-router-dom';
 import { getDateFormat } from 'utils/helpers';
 import './NoticeView.scss';
 
 // 공지사항 Detail 페이지
 const NoticeView = () => {
-    let { boardID } = useParams();
+    const { boardID } = useParams();
     // 제목
     const [title, setTitle] = useState<string>('');
     // 날짜
@@ -20,7 +20,7 @@ const NoticeView = () => {
      * view API 불러오기
      */
     const getView = async () => {
-        const res = await fetcher(METHOD.GET, `/api/v1/cms/notices/${boardID}`);
+        const res = await fetcher(EMehod.GET, `/api/v1/cms/notices/${boardID}`);
         setTitle(res.data.title);
         setDate(res.data.createDate);
         setHtmlCode(res.data.content);

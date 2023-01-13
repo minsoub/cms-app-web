@@ -4,13 +4,13 @@ import { getDateFormat } from 'utils/helpers';
 import { useRecoilValue } from 'recoil';
 import { categoryState } from '../../../recoil/board/atom';
 
-interface INoticeListProps {
+interface IItemProps {
     id: string; // 게시글 id
     title: string; // 제목
     createDate: string; // 작성일
     type: string; // 게시글 type (fixed, normal)
-    categoryNames?: string[];
-    categoryIds?: string[];
+    categoryNames?: string[]; // 카테고리 (fixed)
+    categoryIds?: string[]; // 카테고리 (normal)
 }
 
 /**
@@ -18,9 +18,11 @@ interface INoticeListProps {
  * @param title {string}
  * @param createDate {string}
  * @param type {string}
+ * @param categoryNames {string[] | undefined}
+ * @param categoryIds {string[] | undefined}
  * @constructor
  */
-const Item = ({ title, createDate, id, type, categoryNames, categoryIds }: INoticeListProps) => {
+const Item = ({ title, createDate, id, type, categoryNames, categoryIds }: IItemProps) => {
     const categoryTypeObjs = useRecoilValue(categoryState);
 
     const submit = useMemo(() => {

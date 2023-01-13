@@ -4,7 +4,7 @@ import Category from 'components/List/Category';
 import Item from 'components/List/Item';
 import Pagination from 'components/List/Pagination';
 import fetcher from 'lib/api';
-import { METHOD, TNoticeList } from 'lib/type';
+import { EMehod, TNoticeList } from 'lib/type';
 import { boardDataState } from 'recoil/board/atom';
 import './NoticeList.scss';
 
@@ -21,7 +21,7 @@ const NoticeList = () => {
      * 게시글 리스트 API 불러오기
      */
     const getList = async () => {
-        const res = await fetcher(METHOD.GET, `/api/v1/cms/notices`, {
+        const res = await fetcher(EMehod.GET, `/api/v1/cms/notices`, {
             params: {
                 pageNo: boardInfo.pageNumber,
                 pageSize: boardInfo.size,

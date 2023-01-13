@@ -1,11 +1,6 @@
 // API 통신 메서드
-export enum METHOD {
+export enum EMehod {
     GET = 'get'
-}
-
-// 카테고리 선택
-export interface ICategoryProps {
-    handleSelect: (value?: string) => void; // 카테고리 선택
 }
 
 // 페이징네이션
@@ -17,8 +12,8 @@ export type TPagination = {
     categoryId?: string; // 카테고리 아이디
 };
 
-// 게시물 pagination
-export interface IBoardState {
+// 공지사항 List API response
+export interface IBoardResponse {
     pageable: {
         sort: {
             empty: boolean;
@@ -57,7 +52,7 @@ export type TNoticeList = {
 
 //
 // 공지사항 Detail
-export type TNoticeDetail = {
+export interface INoticeDetail {
     id: string;
     title: string; // 제목
     categoryNames: string[]; // 카테고리명
@@ -75,7 +70,7 @@ export type TNoticeDetail = {
 };
 
 // 공지사항 카테고리
-export type TCategory = {
+export interface ICategory  {
     id: string; // 카테고리 ID
     name: string; // 카테고리명
 };

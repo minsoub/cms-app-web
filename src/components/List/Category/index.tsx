@@ -1,9 +1,13 @@
-import { ICategoryProps, METHOD } from 'lib/type';
+import { EMehod, ICategory } from 'lib/type';
 import fetcher from 'lib/api';
 import { useEffect } from 'react';
 import './Category.scss';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { boardDataState, categoryState } from 'recoil/board/atom';
+
+export interface ICategoryProps {
+    handleSelect: (value?: string) => void; // 카테고리 선택
+}
 
 /**
  * 카테고리 영역
@@ -22,7 +26,7 @@ const Category = ({ handleSelect }: ICategoryProps) => {
      * 카테고리 API 불러오기
      */
     const getCategory = async () => {
-        const res = await fetcher(METHOD.GET, `/api/v1/cms/categories`);
+        const res = await fetcher(EMehod.GET, `/api/v1/cms/categories`);
         const data = res.data;
 
         for (const category of data) {
