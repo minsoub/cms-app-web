@@ -74,6 +74,7 @@ const NoticeList = () => {
                                 title={item.title}
                                 createDate={item.createDate}
                                 id={item.id}
+                                categoryNames={item.categoryNames}
                                 key={item.id}
                             />
                         );
@@ -86,6 +87,7 @@ const NoticeList = () => {
                                 title={item.title}
                                 createDate={item.createDate}
                                 id={item.id}
+                                categoryIds={item.categoryIds}
                                 key={item.id}
                             />
                         );

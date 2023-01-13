@@ -51,9 +51,11 @@ export type TNoticeList = {
     id: string; // 게시글 id
     title: string; // 제목
     createDate: string; // 카테고리명
-    categoryNames: string[];
+    categoryNames?: string[];
+    categoryIds?: string[];
 };
 
+//
 // 공지사항 Detail
 export type TNoticeDetail = {
     id: string;

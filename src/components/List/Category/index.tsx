@@ -2,8 +2,8 @@ import { ICategoryProps, METHOD, TCategory } from 'lib/type';
 import fetcher from 'lib/api';
 import { useEffect, useState } from 'react';
 import './Category.scss';
-import { useRecoilValue } from 'recoil';
-import { boardDataState } from 'recoil/board/atom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { boardDataState, categoryState } from 'recoil/board/atom';
 
 /**
  * 카테고리 영역
@@ -13,7 +13,8 @@ import { boardDataState } from 'recoil/board/atom';
  */
 const Category = ({ handleSelect }: ICategoryProps) => {
     // 카테고리 리스트 api
-    const [categoryList, setCategoryList] = useState<TCategory[]>([]);
+    const [categoryMap, setCategoryMap] = useRecoilState(categoryState);
+
     // 카테고리 info
     const categoryInfo = useRecoilValue(boardDataState);
 
@@ -23,7 +24,11 @@ const Category = ({ handleSelect }: ICategoryProps) => {
     const getCategory = async () => {
         const res = await fetcher(METHOD.GET, `/api/v1/cms/categories`);
         const data = res.data;
-        setCategoryList(data);
+
+        for (const category of data) {
+            // @ts-ignore
+            setCategoryMap((prev) => new Map([...prev, [category.id, category.name]]));
+        }
     };
 
     useEffect(() => {
@@ -37,17 +42,18 @@ const Category = ({ handleSelect }: ICategoryProps) => {
                     <span className="board-list-category__text">전체</span>
                 </button>
             </li>
-            
-            {categoryList.map((item: TCategory) => {
+            {Array.from(categoryMap).map((categoryItem) => {
+                const categoryId = categoryItem[0];
+                const categoryName = categoryItem[1];
                 return (
                     <li
                         className={`board-list-category__item ${
-                            item.id === categoryInfo.categoryId ? 'board-list-category__item--active' : ''
+                            categoryId === categoryInfo.categoryId ? 'board-list-category__item--active' : ''
                         }`}
-                        key={item.id}
+                        key={categoryId}
                     >
-                        <button type="button" onClick={() => handleSelect(item.id)}>
-                            <span className="board-list-category__text">{item.name}</span>
+                        <button type="button" onClick={() => handleSelect(categoryId)}>
+                            <span className="board-list-category__text">{categoryName}</span>
                         </button>
                     </li>
                 );
