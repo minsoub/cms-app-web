@@ -12,6 +12,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<NoticeList />} />
                         <Route path="/:boardID" element={<NoticeView />} />
+                        <Route path="*" element={<NoticeList />} />
                     </Routes>
                 </Router>
             </RecoilRoot>
