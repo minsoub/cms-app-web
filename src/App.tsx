@@ -6,14 +6,16 @@ import NoticeView from './pages/noticeView';
 
 function App() {
     return (
-        <RecoilRoot>
-            <Router>
-                <Routes>
-                    <Route path="/" element={<NoticeList />} />
-                    <Route path="/:boardID" element={<NoticeView />} />
-                </Routes>
-            </Router>
-        </RecoilRoot>
+        <div onContextMenu={(e) => e.preventDefault()}>
+            <RecoilRoot>
+                <Router>
+                    <Routes>
+                        <Route path="/" element={<NoticeList />} />
+                        <Route path="/:boardID" element={<NoticeView />} />
+                    </Routes>
+                </Router>
+            </RecoilRoot>
+        </div>
     );
 }
 
