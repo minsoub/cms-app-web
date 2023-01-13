@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import cx from 'classnames';
 import FirstArrow from './Arrows/FirstArrow';
 import LastArrow from './Arrows/LastArrow';
@@ -8,7 +8,7 @@ import { range } from 'utils/helpers';
 import './Pagination.scss';
 
 type TPaginationProp = {
-    onPageChange: (v: number) => void; // 페이지 변경
+    onPageChange: (pagePostion: number) => void; // 페이지 변경
     currentPage: number; // 현재 페이지
     totalElements: number; // 총 게시물
     totalPages: number; // 페이지 끝
@@ -24,6 +24,7 @@ const Pagination = ({ onPageChange, currentPage, totalElements, totalPages, page
             } else {
                 return 5;
             }
+            // 현재 페이지와 총 페이지 수가 같으면 numberGroup = 5개 보여지도록, 그 외엔 3개
         } else if (currentPage === totalPages) {
             return 5;
         } else {
@@ -33,9 +34,8 @@ const Pagination = ({ onPageChange, currentPage, totalElements, totalPages, page
 
     // 현재 페이지 그룹
     const currentPageGroup = useMemo(() => Math.ceil(currentPage / pageCount), [currentPage, pageCount]);
-    // 전체 페이징 네이션
-    const totalPageGroup = useMemo(() => Math.ceil(totalElements / pageCount), [totalElements, pageCount]);
 
+    // 페이징네이션 넘버 배열
     const paginationRange = useMemo(() => {
         const currentPageGroup = Math.ceil(currentPage / pageCount);
         let lastPageInGroup = currentPageGroup * pageCount;
@@ -47,6 +47,7 @@ const Pagination = ({ onPageChange, currentPage, totalElements, totalPages, page
 
         return range(firstPageInGroup, lastPageInGroup);
     }, [currentPage, totalPages, pageCount]);
+
     /**
      * 제일 첫 페이지
      */
@@ -79,13 +80,14 @@ const Pagination = ({ onPageChange, currentPage, totalElements, totalPages, page
         <nav className={cx('pagination-wrap')}>
             <ul className={cx('pagination')}>
                 {/* 첫 페이지로 */}
-                <li className={cx('pagination-item', { 'pagination--nondisplay-nav-item': currentPage > totalElements - 5 })}>
-                    {currentPageGroup > 1 && currentPageGroup < totalPages && (
+                {currentPageGroup > 1 && currentPageGroup < totalPages && (
+                    <li className={cx('pagination-item', { 'pagination--nondisplay-nav-item': currentPage > totalElements - 5 })}>
                         <button className={cx('button', 'button-arrow')} type="button" onClick={handleFirst}>
                             <FirstArrow />
                         </button>
-                    )}
-                </li>
+                    </li>
+                )}
+
                 {/* 이전 페이지 */}
                 {currentPage > 1 && (
                     <li className={cx('pagination-item')}>

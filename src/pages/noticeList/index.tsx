@@ -28,7 +28,6 @@ const NoticeList = () => {
         });
 
         if (res.result === 'SUCCESS') {
-            console.log('하이', res.data);
             setBoardInfo((prev) => ({ ...prev, totalElements: res.data.list.totalElements, totalPages: res.data.list.totalPages }));
             setNotice(res.data.list.content);
             setFixNotice(res.data.fix);
@@ -37,7 +36,7 @@ const NoticeList = () => {
 
     /**
      * 카테고리 선택
-     * @param value {string}
+     * @param categoryId {string}
      */
     const handleCategorySelect = (categoryId?: string) => {
         setBoardInfo((prev) => ({ ...prev, categoryId: categoryId, pageNumber: 1 }));
@@ -54,10 +53,6 @@ const NoticeList = () => {
     useEffect(() => {
         getList();
     }, [boardInfo.pageNumber, boardInfo.size, boardInfo.categoryId]);
-
-    useEffect(() => {
-        console.log({ boardInfo });
-    }, [boardInfo]);
 
     return (
         <main className="board-list-wrap">

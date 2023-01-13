@@ -16,6 +16,7 @@ const Category = ({ handleSelect }: ICategoryProps) => {
     const [categoryList, setCategoryList] = useState<TCategory[]>([]);
     // 카테고리 info
     const categoryInfo = useRecoilValue(boardDataState);
+
     /**
      * 카테고리 API 불러오기
      */
@@ -36,6 +37,7 @@ const Category = ({ handleSelect }: ICategoryProps) => {
                     <span className="board-list-category__text">전체</span>
                 </button>
             </li>
+            
             {categoryList.map((item: TCategory) => {
                 return (
                     <li

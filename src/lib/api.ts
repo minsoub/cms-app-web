@@ -12,6 +12,12 @@ const apis = axios.create({
     baseURL: `${process.env.REACT_APP_CMS_URL}` // 기본 서버 주소 입력
 });
 
+/**
+ * api CRUD 메서드
+ * @param method {METHOD} CRUD
+ * @param url {string} api url
+ * @param params {TPramsProps} config
+ */
 const fetcher = async (method: METHOD, url: string, params?: TPramsProps) => {
     try {
         const res = await apis[method](url, { params });

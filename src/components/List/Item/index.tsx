@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { boardDataState } from '../../../recoil/board/atom';
+import { boardDataState } from 'recoil/board/atom';
 import { getDateFormat } from 'utils/helpers';
-import { useEffect } from 'react';
 
 interface INoticeListProps {
     id: string; // 게시글 id
@@ -12,25 +11,36 @@ interface INoticeListProps {
 }
 
 /**
+ * @param id {string}
  * @param title {string}
  * @param createDate {string}
- * @param id {string}
  * @param type {string}
  * @constructor
  */
-const Item = ({ title, createDate, id, type }: INoticeListProps) => {
-    // 게시판 info
-    const boardInfo = useRecoilValue(boardDataState);
+const Item = ({ id, title, createDate, type }: INoticeListProps) => {
+    // 카테고리 목록
+    const categoryTypeName = useRecoilValue(boardDataState);
 
     return (
         <li className={`board-list__item ${type}`} key={id}>
             <Link className="board-list__link" to={`/${id}`}>
                 <h4 className="board-list__title">
-                    <span>&#91;{boardInfo.categoryId}&#93;</span>
+                    {/*
+                        카테고리명 [ ] 대괄호로 구분
+                        카테고리 종류가 2개면 [안내/서비스] 이런식으로 구분
+                    */}
+                    {categoryTypeName.categoryId?.length === 1 ? (
+                        <span>&#91;{categoryTypeName.categoryId}&#93;</span>
+                    ) : (
+                        <span>
+                            &#91;{categoryTypeName.categoryId}/{categoryTypeName.categoryId}&#93;
+                        </span>
+                    )}
+
+                    {/* 게시글 제목 */}
                     {title}
                 </h4>
-                <p className="board-list__date">{getDateFormat(createDate)}</p>
-                <h4 className="board-list__title">{title}</h4>
+                <p className="board-list__date">{getDateFormat(createDate)}</p> {/* 게시글 작성일 */}
             </Link>
         </li>
     );

@@ -4,7 +4,6 @@ import fetcher from 'lib/api';
 import { METHOD } from 'lib/type';
 import { useParams } from 'react-router-dom';
 import { getDateFormat } from 'utils/helpers';
-
 import './NoticeView.scss';
 
 // 공지사항 Detail 페이지
@@ -26,6 +25,8 @@ const NoticeView = () => {
         setDate(res.data.createDate);
         setHtmlCode(res.data.content);
     };
+
+    // 페이지 진입시 스크롤 포지션 top: 0으로
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,

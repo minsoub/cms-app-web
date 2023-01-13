@@ -3,28 +3,18 @@ export enum METHOD {
     GET = 'get'
 }
 
-export interface IItemProps {
-    type: string;
-    title: string;
-    create_date: string;
-    id: string;
-}
-
+// 카테고리 선택
 export interface ICategoryProps {
     handleSelect: (value?: string) => void; // 카테고리 선택
 }
 
-// 게시글 파라미터
-export interface IPath {
-    boardID: any;
-}
-
+// 페이징네이션
 export type TPagination = {
-    totalPages: number;
-    totalElements: number;
+    totalPages: number; // 총 페이지 수
+    totalElements: number; // 총 게시글
     size: number;
     pageNumber: number;
-    categoryId?: string;
+    categoryId?: string; // 카테고리 아이디
 };
 
 // 게시물 pagination

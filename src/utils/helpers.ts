@@ -5,7 +5,6 @@ export const range = (start: number, end: number): number[] => {
     const length = end - start + 1;
     return Array.from({ length }, (_, index) => index + start);
 };
-
 // 날짜 포멧 처리 utc + 9
 export const getDateFormat = (paramDate: string) => {
     if (paramDate) {
