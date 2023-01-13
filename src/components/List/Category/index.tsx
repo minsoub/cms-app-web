@@ -1,6 +1,6 @@
-import { ICategoryProps, METHOD, TCategory } from 'lib/type';
+import { ICategoryProps, METHOD } from 'lib/type';
 import fetcher from 'lib/api';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import './Category.scss';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { boardDataState, categoryState } from 'recoil/board/atom';

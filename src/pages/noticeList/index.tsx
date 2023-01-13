@@ -22,9 +22,11 @@ const NoticeList = () => {
      */
     const getList = async () => {
         const res = await fetcher(METHOD.GET, `/api/v1/cms/notices`, {
-            pageNo: boardInfo.pageNumber,
-            pageSize: boardInfo.size,
-            categoryId: boardInfo.categoryId
+            params: {
+                pageNo: boardInfo.pageNumber,
+                pageSize: boardInfo.size,
+                categoryId: boardInfo.categoryId
+            }
         });
 
         if (res.result === 'SUCCESS') {

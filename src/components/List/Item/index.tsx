@@ -25,9 +25,9 @@ const Item = ({ title, createDate, id, type, categoryNames, categoryIds }: INoti
 
     const submit = useMemo(() => {
         if (categoryNames && categoryNames.length) {
-            return <span className={'board-list__title'}>[{categoryNames.join(' /')}]&nbsp;</span>;
+            return <span className={'board-list__title'}>&#91;{categoryNames.join(' /')}&#93;&nbsp;</span>;
         } else if (categoryIds && categoryIds.length) {
-            return <span>[{categoryIds.map((id) => categoryTypeObjs.get(id)).join(' /')}]&nbsp;</span>;
+            return <span>&#91;{categoryIds.map((id) => categoryTypeObjs.get(id)).join(' /')}&#93;&nbsp;</span>;
         } else {
             return false;
         }

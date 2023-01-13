@@ -1,12 +1,5 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { METHOD } from './type';
-
-// config 값 type
-type TPramsProps = {
-    pageNo: number;
-    pageSize: number;
-    categoryId?: string;
-};
 
 const apis = axios.create({
     baseURL: `${process.env.REACT_APP_CMS_URL}` // 기본 서버 주소 입력
@@ -16,11 +9,11 @@ const apis = axios.create({
  * api CRUD 메서드
  * @param method {METHOD} CRUD
  * @param url {string} api url
- * @param params {TPramsProps} config
+ * @param config {AxiosRequestConfig} config
  */
-const fetcher = async (method: METHOD, url: string, params?: TPramsProps) => {
+const fetcher = async (method: METHOD, url: string, config?: AxiosRequestConfig) => {
     try {
-        const res = await apis[method](url, { params });
+        const res = await apis[method](url, config);
         return res.data;
     } catch (error: any) {
         return error;
